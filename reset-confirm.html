@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tamildriving – Set New Password</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #D32F2F; --orange: #FF6F00;
+      --bg: #0D0D0D; --card: #1A1A1A; --border: #2A2A2A;
+      --text: #F5F5F5; --muted: #888; --input-bg: #111;
+    }
+    body {
+      font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 40px; width: 100%; max-width: 420px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .logo-text { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; }
+    .logo-text span { color: var(--red); }
+    h1 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+    .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+    .field { margin-bottom: 16px; }
+    label { font-size: 13px; font-weight: 500; color: var(--muted); display: block; margin-bottom: 6px; }
+    input {
+      width: 100%; padding: 12px 14px;
+      background: var(--input-bg); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-family: 'Inter', sans-serif;
+      font-size: 15px; outline: none; transition: border-color 0.2s;
+    }
+    input:focus { border-color: var(--red); }
+    .btn {
+      width: 100%; padding: 13px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: #fff; border: none; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: opacity 0.2s; margin-top: 8px;
+    }
+    .btn:hover { opacity: 0.9; }
+    .message { padding: 12px 14px; border-radius: 8px; font-size: 14px; margin-bottom: 16px; display: none; }
+    .message.success { background: #1a2e1a; color: #66bb6a; border: 1px solid #2e4d2e; display: block; }
+    .message.error   { background: #2e1a1a; color: #ef5350; border: 1px solid #4d2e2e; display: block; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <div class="logo-icon">🚗</div>
+    <div class="logo-text">Tamil<span>driving</span></div>
+  </div>
+  <h1>Set new password</h1>
+  <p class="subtitle">Choose a strong password for your account.</p>
+
+  <div id="msg" class="message"></div>
+
+  <div class="field">
+    <label>New password</label>
+    <input type="password" id="new-password" placeholder="Min. 8 characters" />
+  </div>
+  <div class="field">
+    <label>Confirm password</label>
+    <input type="password" id="confirm-password" placeholder="Repeat password" />
+  </div>
+  <button class="btn" onclick="updatePassword()">Update password</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const { createClient } = supabase;
+  const sb = createClient('YOUR_PROJECT_URL', 'YOUR_ANON_KEY');
+
+  async function updatePassword() {
+    const newPass  = document.getElementById('new-password').value;
+    const confirm  = document.getElementById('confirm-password').value;
+    const msg      = document.getElementById('msg');
+
+    if (!newPass || !confirm) return showMsg('Please fill in both fields.', 'error');
+    if (newPass.length < 8)   return showMsg('Password must be at least 8 characters.', 'error');
+    if (newPass !== confirm)  return showMsg('Passwords do not match.', 'error');
+
+    const { error } = await sb.auth.updateUser({ password: newPass });
+    if (error) {
+      showMsg(error.message, 'error');
+    } else {
+      showMsg('✅ Password updated! Redirecting to login...', 'success');
+      setTimeout(() => window.location.href = 'login.html', 2000);
+    }
+  }
+
+  function showMsg(text, type) {
+    const el = document.getElementById('msg');
+    el.textContent = text;
+    el.className = 'message ' + type;
+  }
+</script>
+</body>
+</html>

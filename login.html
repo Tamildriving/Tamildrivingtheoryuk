@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tamildriving – Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #D32F2F;
+      --red-dark: #B71C1C;
+      --orange: #FF6F00;
+      --bg: #0D0D0D;
+      --card: #1A1A1A;
+      --border: #2A2A2A;
+      --text: #F5F5F5;
+      --muted: #888;
+      --input-bg: #111;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span { color: var(--red); }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: var(--input-bg);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      background: var(--red);
+      color: #fff;
+    }
+
+    /* Forms */
+    .form { display: none; flex-direction: column; gap: 16px; }
+    .form.active { display: flex; }
+
+    label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus { border-color: var(--red); }
+
+    .btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+
+    .btn:hover { opacity: 0.9; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .forgot {
+      text-align: right;
+      margin-top: -8px;
+    }
+
+    .forgot a {
+      color: var(--red);
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .forgot a:hover { text-decoration: underline; }
+
+    .message {
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .message.success { background: #1a2e1a; color: #66bb6a; border: 1px solid #2e4d2e; display: block; }
+    .message.error   { background: #2e1a1a; color: #ef5350; border: 1px solid #4d2e2e; display: block; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 8px 0;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">
+    <div class="logo-icon">🚗</div>
+    <div class="logo-text">Tamil<span>driving</span></div>
+  </div>
+
+  <h1>Welcome back</h1>
+  <p class="subtitle">Sign in to your account to continue</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('login')">Login</button>
+    <button class="tab" onclick="switchTab('signup')">Sign Up</button>
+    <button class="tab" onclick="switchTab('reset')">Reset</button>
+  </div>
+
+  <!-- LOGIN FORM -->
+  <div class="form active" id="form-login">
+    <div id="msg-login" class="message"></div>
+    <div>
+      <label>Email address</label>
+      <input type="email" id="login-email" placeholder="you@example.com" />
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="••••••••" />
+    </div>
+    <div class="forgot"><a href="#" onclick="switchTab('reset')">Forgot password?</a></div>
+    <button class="btn" onclick="login()">Sign in</button>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div class="form" id="form-signup">
+    <div id="msg-signup" class="message"></div>
+    <div>
+      <label>Full name</label>
+      <input type="text" id="signup-name" placeholder="Your name" />
+    </div>
+    <div>
+      <label>Email address</label>
+      <input type="email" id="signup-email" placeholder="you@example.com" />
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" id="signup-password" placeholder="Min. 8 characters" />
+    </div>
+    <button class="btn" onclick="signUp()">Create account</button>
+  </div>
+
+  <!-- RESET FORM -->
+  <div class="form" id="form-reset">
+    <div id="msg-reset" class="message"></div>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:4px;">Enter your email and we'll send you a reset link.</p>
+    <div>
+      <label>Email address</label>
+      <input type="email" id="reset-email" placeholder="you@example.com" />
+    </div>
+    <button class="btn" onclick="resetPassword()">Send reset link</button>
+  </div>
+
+  <p class="footer-note">© 2026 Tamildriving. All rights reserved.</p>
+</div>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const { createClient } = supabase;
+  const sb = createClient('YOUR_PROJECT_URL', 'YOUR_ANON_KEY');
+
+  // ── TAB SWITCHER ──────────────────────────────────────
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', ['login','signup','reset'][i] === tab);
+    });
+    document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+    document.getElementById('form-' + tab).classList.add('active');
+  }
+
+  // ── SHOW MESSAGE ──────────────────────────────────────
+  function showMsg(id, text, type) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.className = 'message ' + type;
+  }
+
+  // ── LOGIN ─────────────────────────────────────────────
+  async function login() {
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    if (!email || !password) return showMsg('msg-login', 'Please fill in all fields.', 'error');
+
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) {
+      showMsg('msg-login', error.message, 'error');
+    } else {
+      showMsg('msg-login', 'Logged in! Redirecting...', 'success');
+      setTimeout(() => window.location.href = 'dashboard.html', 1000);
+    }
+  }
+
+  // ── SIGN UP ───────────────────────────────────────────
+  async function signUp() {
+    const name     = document.getElementById('signup-name').value.trim();
+    const email    = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    if (!name || !email || !password) return showMsg('msg-signup', 'Please fill in all fields.', 'error');
+    if (password.length < 8) return showMsg('msg-signup', 'Password must be at least 8 characters.', 'error');
+
+    const { data, error } = await sb.auth.signUp({
+      email, password,
+      options: { data: { full_name: name } }
+    });
+
+    if (error) {
+      showMsg('msg-signup', error.message, 'error');
+    } else {
+      // Save profile to DB
+      if (data.user) {
+        await sb.from('profiles').upsert({
+          id: data.user.id,
+          full_name: name,
+          email: email,
+          created_at: new Date().toISOString()
+        });
+      }
+      showMsg('msg-signup', '✅ Account created! Check your email to confirm.', 'success');
+    }
+  }
+
+  // ── RESET PASSWORD ────────────────────────────────────
+  async function resetPassword() {
+    const email = document.getElementById('reset-email').value.trim();
+    if (!email) return showMsg('msg-reset', 'Please enter your email.', 'error');
+
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/reset-confirm.html'
+    });
+
+    if (error) {
+      showMsg('msg-reset', error.message, 'error');
+    } else {
+      showMsg('msg-reset', '📧 Reset link sent! Check your inbox.', 'success');
+    }
+  }
+
+  // ── AUTO REDIRECT IF ALREADY LOGGED IN ───────────────
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (session) window.location.href = 'dashboard.html';
+  });
+</script>
+</body>
+</html>

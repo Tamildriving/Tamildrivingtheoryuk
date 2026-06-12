@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Tamil Car Driving Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8700A;
+    --orange-light: #F5A94E;
+    --orange-pale: #FFF3E6;
+    --navy: #0F1F3D;
+    --navy-mid: #1A3260;
+    --white: #FFFFFF;
+    --off-white: #FAF8F5;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --green: #1D9E75;
+    --border: rgba(15,31,61,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+  .tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,31,61,0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--white);
+    display: flex; flex-direction: column; line-height: 1.2;
+    text-decoration: none;
+  }
+  .nav-logo span { font-size: 0.7rem; color: var(--orange-light); font-family: 'Noto Sans Tamil', sans-serif; font-weight: 400; }
+  .nav-back {
+    background: rgba(255,255,255,0.08); color: var(--white);
+    padding: 8px 18px; border-radius: 6px;
+    font-size: 0.85rem; font-weight: 400;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.2s;
+  }
+  .nav-back:hover { background: rgba(255,255,255,0.14); }
+
+  .page-hero {
+    background: var(--navy);
+    padding: 110px 5% 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 50% 60%, rgba(232,112,10,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .page-hero-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,112,10,0.15);
+    border: 1px solid rgba(232,112,10,0.3);
+    color: var(--orange-light);
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; color: var(--white);
+    line-height: 1.15; margin-bottom: 10px;
+  }
+  .page-hero-ta {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 18px;
+  }
+  .page-hero-meta {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.02em;
+  }
+
+  .lang-toggle-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 64px; z-index: 50;
+    box-shadow: 0 2px 12px rgba(15,31,61,0.06);
+  }
+  .lang-toggle-bar p { font-size: 0.82rem; color: var(--muted); }
+  .toggle-group { display: flex; gap: 6px; }
+  .toggle-btn {
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 500;
+    border: 1.5px solid var(--border);
+    background: transparent; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .toggle-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+  .content-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 5% 80px;
+  }
+
+  .bilingual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 4px 24px rgba(15,31,61,0.06);
+  }
+
+  .col-en { border-right: 1px solid var(--border); }
+
+  .col-header {
+    padding: 16px 28px;
+    background: var(--navy);
+    display: flex; align-items: center; gap: 10px;
+    position: sticky; top: 110px; z-index: 10;
+  }
+  .col-header-flag { font-size: 1.1rem; }
+  .col-header-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .col-header-lang { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-left: auto; }
+
+  .col-body { padding: 32px 28px; }
+
+  .section-block {
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .section-num {
+    display: inline-block;
+    background: var(--orange-pale);
+    color: var(--orange);
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .section-title-en {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 12px; line-height: 1.3;
+  }
+  .section-title-ta {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 12px; line-height: 1.5;
+  }
+
+  .section-body-en { font-size: 0.9rem; line-height: 1.8; color: #374151; }
+  .section-body-ta { font-family: 'Noto Sans Tamil', sans-serif; font-size: 0.88rem; line-height: 1.9; color: #374151; }
+
+  .section-body-en ul, .section-body-ta ul { margin: 10px 0 10px 18px; }
+  .section-body-en ul li, .section-body-ta ul li { margin-bottom: 6px; }
+
+  .highlight-box {
+    background: var(--orange-pale);
+    border-left: 3px solid var(--orange);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.83rem;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 500;
+  }
+  .data-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: var(--off-white); }
+
+  @media (max-width: 768px) {
+    .bilingual-grid { grid-template-columns: 1fr; }
+    .col-en { border-right: none; border-bottom: 1px solid var(--border); }
+    .col-header { top: 64px; }
+    .col-en.hide { display: none; }
+    .col-ta.hide { display: none; }
+    .data-table { font-size: 0.75rem; }
+  }
+
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 5%;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+  footer a { color: var(--orange-light); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+
+  .date-bar {
+    background: var(--navy-mid);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 10px;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="tamil-driving-theory-landing.html">
+    Tamil Car Driving Theory
+    <span>தமிழ் கார் ஓட்டுநர் கோட்பாடு</span>
+  </a>
+  <a class="nav-back" href="tamil-driving-theory-landing.html">← Back to Home</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-label">🔒 Legal Document</div>
+  <h1>Privacy Policy</h1>
+  <p class="page-hero-ta tamil">தனியுரிமைக் கொள்கை</p>
+  <p class="page-hero-meta">Effective: 6 June 2026 &nbsp;·&nbsp; Last updated: 6 June 2026</p>
+</div>
+
+<div class="date-bar">
+  We are committed to UK GDPR and the Data Protection Act 2018 · UK GDPR மற்றும் தரவு பாதுகாப்பு சட்டம் 2018 க்கு நாங்கள் உறுதிப்பட்டுள்ளோம்
+</div>
+
+<div class="lang-toggle-bar">
+  <p>Side-by-side bilingual · இரு மொழிகளில்</p>
+  <div class="toggle-group">
+    <button class="toggle-btn active" onclick="showLang('both')">Both</button>
+    <button class="toggle-btn" onclick="showLang('en')">English</button>
+    <button class="toggle-btn" onclick="showLang('ta')">தமிழ்</button>
+  </div>
+</div>
+
+<div class="content-wrap">
+  <div class="bilingual-grid" id="bilingualGrid">
+
+    <!-- ENGLISH COLUMN -->
+    <div class="col-en" id="colEn">
+      <div class="col-header">
+        <span class="col-header-flag">🇬🇧</span>
+        <span class="col-header-label">Language</span>
+        <span class="col-header-lang">English</span>
+      </div>
+      <div class="col-body">
+
+        <div class="section-block">
+          <span class="section-num">Section 1</span>
+          <p class="section-title-en">Who We Are</p>
+          <div class="section-body-en">
+            <strong>Data Controller:</strong> Tamil Car Driving Theory<br>
+            <strong>Contact email:</strong> v.ahilan@yahoo.com<br>
+            <strong>Website:</strong> [YOUR WEBSITE URL]<br><br>
+            We are registered with the Information Commissioner's Office (ICO).<br>
+            <strong>ICO Registration Number:</strong> [YOUR ICO NUMBER]
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 2</span>
+          <p class="section-title-en">What Personal Data We Collect</p>
+          <div class="section-body-en">
+            We collect the following categories of personal data:
+            <table class="data-table" style="margin-top:12px">
+              <tr><th>Data</th><th>Why</th></tr>
+              <tr><td>Email address</td><td>Account identification</td></tr>
+              <tr><td>Password</td><td>Stored encrypted via Firebase; we never see plain-text</td></tr>
+              <tr><td>IP address</td><td>Security and fraud prevention at login</td></tr>
+              <tr><td>Device fingerprint</td><td>Browser type, OS, screen resolution — enforces 3-device limit</td></tr>
+              <tr><td>Session data</td><td>Start/end timestamps to monitor usage</td></tr>
+              <tr><td>Payment reference</td><td>Stripe customer ID and purchase date only — no card numbers</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 3</span>
+          <p class="section-title-en">What We Do NOT Collect</p>
+          <div class="section-body-en">
+            <div class="highlight-box">
+              We do not store your card number, CVV, or full payment details — handled exclusively by Stripe. We do not collect your name or home address. We do not use advertising trackers or sell your data to third parties.
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 4</span>
+          <p class="section-title-en">Lawful Basis for Processing</p>
+          <div class="section-body-en">
+            Under UK GDPR, we rely on:
+            <ul style="margin-top:10px">
+              <li><strong>Contract performance</strong> — email and account data necessary to provide access (Article 6(1)(b))</li>
+              <li><strong>Legitimate interests</strong> — device fingerprints and session data to prevent account sharing (Article 6(1)(f))</li>
+              <li><strong>Legal obligation</strong> — payment records retained 7 years for HMRC compliance (Article 6(1)(c))</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 5</span>
+          <p class="section-title-en">How We Use Your Data</p>
+          <div class="section-body-en">
+            <ul>
+              <li>To create and manage your account</li>
+              <li>To verify your 30-day access period</li>
+              <li>To enforce the 3-device access limit</li>
+              <li>To investigate and prevent fraudulent use</li>
+              <li>To comply with legal and regulatory obligations</li>
+              <li>To respond to your support enquiries</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 6</span>
+          <p class="section-title-en">Third-Party Services</p>
+          <div class="section-body-en">
+            We share limited data with trusted processors:
+            <ul style="margin-top:10px">
+              <li><strong>Firebase / Google</strong> — authentication, database, hosting. Data stored in europe-west2 (London). GDPR-compliant.</li>
+              <li><strong>Stripe</strong> — payment processing. PCI DSS Level 1 certified. GDPR-compliant.</li>
+            </ul>
+            Both operate under Data Processing Agreements with us.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 7</span>
+          <p class="section-title-en">Data Retention</p>
+          <div class="section-body-en">
+            <table class="data-table">
+              <tr><th>Data type</th><th>Retention period</th></tr>
+              <tr><td>Account &amp; session data</td><td>Access period + 6 months, then deleted</td></tr>
+              <tr><td>Payment records</td><td>7 years (HMRC obligation)</td></tr>
+              <tr><td>Security logs (IP, login times)</td><td>12 months, then deleted</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 8</span>
+          <p class="section-title-en">Your Rights Under UK GDPR</p>
+          <div class="section-body-en">
+            You have the right to:
+            <ul style="margin-top:10px">
+              <li><strong>Access</strong> — request a copy of data we hold about you</li>
+              <li><strong>Rectification</strong> — ask us to correct inaccurate data</li>
+              <li><strong>Erasure</strong> — request deletion of your account and data</li>
+              <li><strong>Restriction</strong> — limit how we process your data</li>
+              <li><strong>Portability</strong> — receive your data in a machine-readable format</li>
+              <li><strong>Object</strong> — object to processing based on legitimate interests</li>
+            </ul>
+            <br>Contact us at v.ahilan@yahoo.com to exercise any of these rights. We will respond within 30 days. You may also complain to the ICO at <strong>ico.org.uk</strong> or call <strong>0303 123 1113</strong>.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 9</span>
+          <p class="section-title-en">Cookies</p>
+          <div class="section-body-en">
+            We use essential cookies only, required for login session management. We do not use advertising or analytics cookies without your consent. A cookie consent notice is displayed on your first visit.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 10</span>
+          <p class="section-title-en">Security</p>
+          <div class="section-body-en">
+            We protect your data through encrypted password storage, HTTPS-only access, Firestore security rules restricting data access, and regular review of access permissions.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 11</span>
+          <p class="section-title-en">Children</p>
+          <div class="section-body-en">
+            This Service is intended for users aged 16 and over. We do not knowingly collect personal data from children under 16. If you believe a child has provided us with their data, please contact us immediately.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 12</span>
+          <p class="section-title-en">Changes to This Policy</p>
+          <div class="section-body-en">
+            We may update this Privacy Policy from time to time. We will notify registered users by email of any material changes. Continued use of the Service after changes constitutes acceptance of the updated policy.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">Section 13</span>
+          <p class="section-title-en">Contact Us</p>
+          <div class="section-body-en">
+            <strong>Email:</strong> v.ahilan@yahoo.com<br>
+            <strong>Phone:</strong> 07392 293330<br>
+            <strong>Address:</strong> 51 Elmwood Road, Slough SL2 5QH
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /col-en -->
+
+    <!-- TAMIL COLUMN -->
+    <div class="col-ta" id="colTa">
+      <div class="col-header">
+        <span class="col-header-flag">🇮🇳</span>
+        <span class="col-header-label">மொழி</span>
+        <span class="col-header-lang tamil">தமிழ்</span>
+      </div>
+      <div class="col-body">
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 1</span>
+          <p class="section-title-ta">நாங்கள் யார்</p>
+          <div class="section-body-ta">
+            <strong>தரவு கட்டுப்படுத்துபவர்:</strong> Tamil Car Driving Theory<br>
+            <strong>தொடர்பு மின்னஞ்சல்:</strong> v.ahilan@yahoo.com<br>
+            <strong>இணையதளம்:</strong> [உங்கள் இணையதள URL]<br><br>
+            நாங்கள் தகவல் ஆணையாளர் அலுவலகத்தில் (ICO) பதிவு செய்யப்பட்டுள்ளோம்.<br>
+            <strong>ICO பதிவு எண்:</strong> [உங்கள் ICO எண்]
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 2</span>
+          <p class="section-title-ta">நாங்கள் சேகரிக்கும் தனிப்பட்ட தரவு</p>
+          <div class="section-body-ta">
+            பின்வரும் வகை தனிப்பட்ட தரவுகளை சேகரிக்கிறோம்:
+            <table class="data-table" style="margin-top:12px">
+              <tr><th>தரவு</th><th>ஏன்</th></tr>
+              <tr><td>மின்னஞ்சல் முகவரி</td><td>கணக்கு அடையாளம்</td></tr>
+              <tr><td>கடவுச்சொல்</td><td>Firebase மூலம் குறியாக்கம் செய்யப்பட்டு சேமிக்கப்படுகிறது</td></tr>
+              <tr><td>IP முகவரி</td><td>பாதுகாப்பு மற்றும் மோசடி தடுப்பு</td></tr>
+              <tr><td>சாதன அடையாளம்</td><td>உலாவி வகை, OS — 3 சாதன வரம்பை செயல்படுத்த</td></tr>
+              <tr><td>அமர்வு தரவு</td><td>தொடக்க/இறுதி நேரங்கள்</td></tr>
+              <tr><td>கட்டண குறிப்பு</td><td>Stripe வாடிக்கையாளர் ID மட்டுமே — அட்டை எண்கள் இல்லை</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 3</span>
+          <p class="section-title-ta">நாங்கள் சேகரிக்காதவை</p>
+          <div class="section-body-ta">
+            <div class="highlight-box">
+              உங்கள் அட்டை எண், CVV அல்லது முழு கட்டண விவரங்களை சேமிக்கவில்லை — இவை Stripe மட்டுமே கையாளும். உங்கள் பெயர் அல்லது வீட்டு முகவரியை சேகரிக்கவில்லை. விளம்பர கண்காணிப்பாளர்கள் பயன்படுத்துவதில்லை மற்றும் தரவை மூன்றாம் தரப்பினருக்கு விற்பதில்லை.
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 4</span>
+          <p class="section-title-ta">செயலாக்கத்திற்கான சட்டப்பூர்வ அடிப்படை</p>
+          <div class="section-body-ta">
+            UK GDPR இன் கீழ் நாங்கள் நம்பிக்கை வைக்கிறோம்:
+            <ul style="margin-top:10px">
+              <li><strong>ஒப்பந்த நிறைவேற்றம்</strong> — அணுகலை வழங்க மின்னஞ்சல் மற்றும் கணக்கு தரவு தேவை (சட்டவிதி 6(1)(b))</li>
+              <li><strong>சட்டபூர்வ நலன்கள்</strong> — கணக்கு பகிர்வை தடுக்க சாதன தரவு (சட்டவிதி 6(1)(f))</li>
+              <li><strong>சட்டப் கடமை</strong> — HMRC இணக்கத்திற்கு 7 ஆண்டுகள் கட்டண பதிவுகள் (சட்டவிதி 6(1)(c))</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 5</span>
+          <p class="section-title-ta">உங்கள் தரவை எவ்வாறு பயன்படுத்துகிறோம்</p>
+          <div class="section-body-ta">
+            <ul>
+              <li>உங்கள் கணக்கை உருவாக்க மற்றும் நிர்வகிக்க</li>
+              <li>உங்கள் 30 நாள் அணுகல் காலத்தை சரிபார்க்க</li>
+              <li>3 சாதன அணுகல் வரம்பை செயல்படுத்த</li>
+              <li>மோசடியான பயன்பாட்டை விசாரிக்க மற்றும் தடுக்க</li>
+              <li>சட்ட மற்றும் ஒழுங்குமுறை கடமைகளை பூர்த்தி செய்ய</li>
+              <li>உங்கள் ஆதரவு கோரிக்கைகளுக்கு பதிலளிக்க</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 6</span>
+          <p class="section-title-ta">மூன்றாம் தரப்பு சேவைகள்</p>
+          <div class="section-body-ta">
+            நம்பகமான செயலாளர்களுடன் குறைந்த தரவை பகிர்கிறோம்:
+            <ul style="margin-top:10px">
+              <li><strong>Firebase / Google</strong> — அங்கீகாரம், தரவுத்தளம், வழங்கல். europe-west2 (லண்டன்) பகுதியில் சேமிக்கப்படுகிறது. GDPR இணக்கமானது.</li>
+              <li><strong>Stripe</strong> — கட்டண செயலாக்கம். PCI DSS நிலை 1 சான்றிதழ் பெற்றது. GDPR இணக்கமானது.</li>
+            </ul>
+            இரண்டும் எங்களுடன் தரவு செயலாக்க ஒப்பந்தங்களில் செயல்படுகின்றன.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 7</span>
+          <p class="section-title-ta">தரவு சேமிப்பு காலம்</p>
+          <div class="section-body-ta">
+            <table class="data-table">
+              <tr><th>தரவு வகை</th><th>சேமிப்பு காலம்</th></tr>
+              <tr><td>கணக்கு மற்றும் அமர்வு தரவு</td><td>அணுகல் காலம் + 6 மாதங்கள், பின் நீக்கம்</td></tr>
+              <tr><td>கட்டண பதிவுகள்</td><td>7 ஆண்டுகள் (HMRC கடமை)</td></tr>
+              <tr><td>பாதுகாப்பு பதிவுகள்</td><td>12 மாதங்கள், பின் நீக்கம்</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 8</span>
+          <p class="section-title-ta">UK GDPR இன் கீழ் உங்கள் உரிமைகள்</p>
+          <div class="section-body-ta">
+            உங்களுக்கு பின்வரும் உரிமைகள் உள்ளன:
+            <ul style="margin-top:10px">
+              <li><strong>அணுகல்</strong> — நாங்கள் வைத்திருக்கும் தரவின் நகலை கோரலாம்</li>
+              <li><strong>திருத்தம்</strong> — தவறான தரவை சரிசெய்ய கேட்கலாம்</li>
+              <li><strong>நீக்கம்</strong> — கணக்கு மற்றும் தரவை நீக்க கோரலாம்</li>
+              <li><strong>கட்டுப்பாடு</strong> — தரவு செயலாக்கத்தை வரம்பிட கேட்கலாம்</li>
+              <li><strong>பகிரும் திறன்</strong> — இயந்திரம் படிக்கக்கூடிய வடிவத்தில் தரவை பெறலாம்</li>
+              <li><strong>ஆட்சேபனை</strong> — சட்டபூர்வ நலன்கள் அடிப்படையிலான செயலாக்கத்திற்கு எதிர்ப்பு தெரிவிக்கலாம்</li>
+            </ul>
+            <br>v.ahilan@yahoo.com என்ற மின்னஞ்சலில் தொடர்பு கொள்ளவும். 30 நாட்களுக்குள் பதிலளிப்போம். ICO வில் புகார் செய்யலாம்: <strong>ico.org.uk</strong> அல்லது <strong>0303 123 1113</strong>.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 9</span>
+          <p class="section-title-ta">குக்கீகள்</p>
+          <div class="section-body-ta">
+            உள்நுழைவு அமர்வு மேலாண்மைக்கு தேவையான அத்தியாவசிய cookies/குக்_கீகள் மட்டுமே பயன்படுத்துகிறோம். உங்கள் சம்மதம் இல்லாமல் விளம்பர அல்லது பகுப்பாய்வு குக்_கீகள் பயன்படுத்துவதில்லை.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 10</span>
+          <p class="section-title-ta">பாதுகாப்பு</p>
+          <div class="section-body-ta">
+            குறியாக்கப்பட்ட கடவுச்சொல் சேமிப்பு, HTTPS மட்டுமே அணுகல், Firestore பாதுகாப்பு விதிகள் மற்றும் அணுகல் அனுமதிகளின் வழக்கமான மதிப்பாய்வு மூலம் உங்கள் தரவை பாதுகாக்கிறோம்.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 11</span>
+          <p class="section-title-ta">குழந்தைகள்</p>
+          <div class="section-body-ta">
+            இந்த சேவை 16 வயது மற்றும் அதற்கு மேற்பட்ட பயனர்களுக்காக வடிவமைக்கப்பட்டுள்ளது. 16 வயதிற்கு குறைந்த குழந்தைகளிடமிருந்து தரவை சேகரிக்கவில்லை. குழந்தை தரவு வழங்கியிருப்பதாக நம்பினால் உடனடியாக எங்களை தொடர்பு கொள்ளவும்.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 12</span>
+          <p class="section-title-ta">கொள்கை மாற்றங்கள்</p>
+          <div class="section-body-ta">
+            இந்த தனியுரிமைக் கொள்கையை எப்போதாவது புதுப்பிக்கலாம். முக்கியமான மாற்றங்களை பதிவு செய்த பயனர்களுக்கு மின்னஞ்சல் மூலம் தெரிவிப்போம். மாற்றங்களுக்குப் பிறகு சேவையை தொடர்ந்து பயன்படுத்துவது புதுப்பிக்கப்பட்ட கொள்கையை ஏற்றுக்கொண்டதாக கருதப்படும்.
+          </div>
+        </div>
+
+        <div class="section-block">
+          <span class="section-num">பிரிவு 13</span>
+          <p class="section-title-ta">எங்களை தொடர்பு கொள்ளவும்</p>
+          <div class="section-body-ta">
+            <strong>மின்னஞ்சல்:</strong> v.ahilan@yahoo.com<br>
+            <strong>தொலைபேசி:</strong> 07392 293330<br>
+            <strong>முகவரி:</strong> 51 Elmwood Road, Slough SL2 5QH
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /col-ta -->
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links-row">
+    <a href="tamil-driving-theory-landing.html">Home</a>
+    <a href="terms.html">Terms &amp; Conditions</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <p>&copy; 2026 Tamil Car Driving Theory. All rights reserved. &nbsp;·&nbsp; Not affiliated with DVSA.</p>
+</footer>
+
+<script>
+function showLang(lang) {
+  const colEn = document.getElementById('colEn');
+  const colTa = document.getElementById('colTa');
+  const btns = document.querySelectorAll('.toggle-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  if (lang === 'en') {
+    colEn.classList.remove('hide');
+    colTa.classList.add('hide');
+    btns[1].classList.add('active');
+  } else if (lang === 'ta') {
+    colEn.classList.add('hide');
+    colTa.classList.remove('hide');
+    btns[2].classList.add('active');
+  } else {
+    colEn.classList.remove('hide');
+    colTa.classList.remove('hide');
+    btns[0].classList.add('active');
+  }
+}
+</script>
+</body>
+</html>

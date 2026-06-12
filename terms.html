@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions — Tamil Car Driving Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8700A;
+    --orange-light: #F5A94E;
+    --orange-pale: #FFF3E6;
+    --navy: #0F1F3D;
+    --navy-mid: #1A3260;
+    --white: #FFFFFF;
+    --off-white: #FAF8F5;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --green: #1D9E75;
+    --border: rgba(15,31,61,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+  .tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,31,61,0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--white);
+    display: flex; flex-direction: column; line-height: 1.2;
+    text-decoration: none;
+  }
+  .nav-logo span { font-size: 0.7rem; color: var(--orange-light); font-family: 'Noto Sans Tamil', sans-serif; font-weight: 400; }
+  .nav-back {
+    background: rgba(255,255,255,0.08); color: var(--white);
+    padding: 8px 18px; border-radius: 6px;
+    font-size: 0.85rem; font-weight: 400;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.2s;
+  }
+  .nav-back:hover { background: rgba(255,255,255,0.14); }
+
+  /* HERO BANNER */
+  .page-hero {
+    background: var(--navy);
+    padding: 110px 5% 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 50% 60%, rgba(232,112,10,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .page-hero-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,112,10,0.15);
+    border: 1px solid rgba(232,112,10,0.3);
+    color: var(--orange-light);
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; color: var(--white);
+    line-height: 1.15; margin-bottom: 10px;
+  }
+  .page-hero-ta {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 18px;
+  }
+  .page-hero-meta {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.02em;
+  }
+
+  /* LANGUAGE TOGGLE */
+  .lang-toggle-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 64px; z-index: 50;
+    box-shadow: 0 2px 12px rgba(15,31,61,0.06);
+  }
+  .lang-toggle-bar p {
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .toggle-group {
+    display: flex; gap: 6px;
+  }
+  .toggle-btn {
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 500;
+    border: 1.5px solid var(--border);
+    background: transparent; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .toggle-btn.active {
+    background: var(--navy); color: var(--white);
+    border-color: var(--navy);
+  }
+
+  /* CONTENT LAYOUT */
+  .content-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 5% 80px;
+  }
+
+  /* SIDE BY SIDE GRID */
+  .bilingual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 4px 24px rgba(15,31,61,0.06);
+  }
+
+  .col-en { border-right: 1px solid var(--border); }
+  .col-ta { }
+
+  .col-header {
+    padding: 16px 28px;
+    background: var(--navy);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .col-header-flag { font-size: 1.1rem; }
+  .col-header-label {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+  .col-header-lang {
+    font-size: 0.95rem; font-weight: 500; color: var(--white);
+    margin-left: auto;
+  }
+
+  .col-body {
+    padding: 32px 28px;
+  }
+
+  /* SECTION BLOCKS */
+  .section-block {
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .section-num {
+    display: inline-block;
+    background: var(--orange-pale);
+    color: var(--orange);
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .section-title-en {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .section-title-ta {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .section-body-en {
+    font-size: 0.9rem; line-height: 1.8;
+    color: #374151;
+  }
+
+  .section-body-ta {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 0.88rem; line-height: 1.9;
+    color: #374151;
+  }
+
+  .section-body-en ul,
+  .section-body-ta ul {
+    margin: 10px 0 10px 18px;
+  }
+  .section-body-en ul li,
+  .section-body-ta ul li {
+    margin-bottom: 6px;
+  }
+
+  .highlight-box {
+    background: var(--orange-pale);
+    border-left: 3px solid var(--orange);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  /* MOBILE: single column */
+  @media (max-width: 768px) {
+    .bilingual-grid {
+      grid-template-columns: 1fr;
+    }
+    .col-en { border-right: none; border-bottom: 1px solid var(--border); }
+    .col-header { top: 64px; }
+
+    /* show/hide based on toggle */
+    .col-en.hide { display: none; }
+    .col-ta.hide { display: none; }
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 5%;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+  footer a { color: var(--orange-light); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links-row {
+    display: flex; gap: 20px; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 12px;
+  }
+
+  /* EFFECTIVE DATE BAR */
+  .date-bar {
+    background: var(--navy-mid);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 10px;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="tamil-driving-theory-landing.html">
+    Tamil Car Driving Theory
+    <span>தமிழ் கார் ஓட்டுநர் கோட்பாடு</span>
+  </a>
+  <a class="nav-back" href="tamil-driving-theory-landing.html">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-label">📄 Legal Document</div>
+  <h1>Terms &amp; Conditions</h1>
+  <p class="page-hero-ta tamil">விதிமுறைகள் மற்றும் நிபந்தனைகள்</p>
+  <p class="page-hero-meta">Effective: 6 June 2026 &nbsp;·&nbsp; Last updated: 6 June 2026</p>
+</div>
+
+<div class="date-bar">
+  Please read these terms carefully before purchasing access to the Service · சேவையை வாங்குவதற்கு முன் இந்த விதிமுறைகளை கவனமாக படிக்கவும்
+</div>
+
+<!-- LANGUAGE TOGGLE (mobile) -->
+<div class="lang-toggle-bar">
+  <p>Side-by-side bilingual · இரு மொழிகளில்</p>
+  <div class="toggle-group">
+    <button class="toggle-btn active" onclick="showLang('both')">Both</button>
+    <button class="toggle-btn" onclick="showLang('en')">English</button>
+    <button class="toggle-btn" onclick="showLang('ta')">தமிழ்</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+  <div class="bilingual-grid" id="bilingualGrid">
+
+    <!-- ENGLISH COLUMN -->
+    <div class="col-en" id="colEn">
+      <div class="col-header">
+        <span class="col-header-flag">🇬🇧</span>
+        <span class="col-header-label">Language</span>
+        <span class="col-header-lang">English</span>
+      </div>
+      <div class="col-body">
+
+        <!-- 1 -->
+        <div class="section-block">
+          <span class="section-num">Section 1</span>
+          <p class="section-title-en">About the Service</p>
+          <div class="section-body-en">
+            The Service is a web-based driving theory practice application providing study materials, practice questions, and revision tools for UK driving theory test candidates. Access is provided on a 30-day, non-recurring basis.
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="section-block">
+          <span class="section-num">Section 2</span>
+          <p class="section-title-en">Eligibility</p>
+          <div class="section-body-en">
+            You must be aged 16 or over to use this Service. By purchasing access you confirm that you are at least 16 years old.
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="section-block">
+          <span class="section-num">Section 3</span>
+          <p class="section-title-en">Account Registration</p>
+          <div class="section-body-en">
+            <ul>
+              <li>You must provide an accurate email address and create a secure password.</li>
+              <li>You are responsible for keeping your login credentials confidential.</li>
+              <li>You must notify us immediately if you suspect unauthorised use of your account.</li>
+              <li>One account per person; you may not create multiple accounts to circumvent access restrictions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="section-block">
+          <span class="section-num">Section 4</span>
+          <p class="section-title-en">Access and Device Limit</p>
+          <div class="section-body-en">
+            Your purchase grants a single personal licence to access the Service for 30 calendar days from the date of purchase. The following conditions apply:
+            <ul style="margin-top:10px">
+              <li>Access is strictly personal and non-transferable.</li>
+              <li>You may access the Service on a maximum of 3 devices.</li>
+              <li>Simultaneous use on more than 3 devices is not permitted.</li>
+              <li>We reserve the right to suspend or terminate access if we detect account sharing or misuse.</li>
+              <li>We monitor device usage, session activity, and IP addresses to enforce these limits and detect fraud.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="section-block">
+          <span class="section-num">Section 5</span>
+          <p class="section-title-en">Prohibited Conduct</p>
+          <div class="section-body-en">
+            You must not:
+            <ul style="margin-top:10px">
+              <li>Share your login credentials with any other person.</li>
+              <li>Sell, sublicense, or otherwise transfer your access to a third party.</li>
+              <li>Attempt to circumvent device limits, access controls, or security measures.</li>
+              <li>Copy, reproduce, or distribute any content from the Service without our written permission.</li>
+              <li>Use the Service in any way that violates applicable UK law.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="section-block">
+          <span class="section-num">Section 6</span>
+          <p class="section-title-en">Payment and Pricing</p>
+          <div class="section-body-en">
+            <ul>
+              <li>All prices are displayed in GBP and include VAT where applicable.</li>
+              <li>Payment is processed securely by Stripe. We do not store your payment card details.</li>
+              <li>Your 30-day access period begins immediately upon successful payment confirmation.</li>
+              <li>This is a one-time purchase, not a subscription. You will not be charged again automatically.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="section-block">
+          <span class="section-num">Section 7</span>
+          <p class="section-title-en">Refunds and Cancellation</p>
+          <div class="section-body-en">
+            <div class="highlight-box">
+              As permitted under the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013 (SI 2013/3134), by purchasing access you expressly consent to the immediate performance of the Service and acknowledge that you lose your right to cancel once access has been granted.
+            </div>
+            Once you have received your login credentials and accessed the Service, no refund will be issued except at our sole discretion in cases of technical failure attributable to us. If you experience a technical problem preventing access, contact us within 7 days of purchase.
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="section-block">
+          <span class="section-num">Section 8</span>
+          <p class="section-title-en">Intellectual Property</p>
+          <div class="section-body-en">
+            All content within the Service, including questions, images, text, and design, is owned by or licensed to us. You are granted a limited, non-exclusive, non-transferable licence to access this content for personal study purposes only during your 30-day access period. You must not reproduce, republish, copy, or distribute any content from the Service without prior written consent.
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="section-block">
+          <span class="section-num">Section 9</span>
+          <p class="section-title-en">Disclaimer of Warranties</p>
+          <div class="section-body-en">
+            The Service is provided for revision and practice purposes only. We do not guarantee that use of the Service will result in passing the official DVSA driving theory test. Content is updated regularly but we cannot guarantee it reflects the very latest DVSA materials at all times. The Service is provided "as is" without warranty of any kind to the extent permitted by law.
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="section-block">
+          <span class="section-num">Section 10</span>
+          <p class="section-title-en">Limitation of Liability</p>
+          <div class="section-body-en">
+            To the maximum extent permitted by UK law, we shall not be liable for any indirect, incidental, or consequential loss arising from your use of the Service. Our total liability to you shall not exceed the amount you paid for your current 30-day access period. Nothing in these Terms limits our liability for death or personal injury caused by negligence, fraud, or any liability that cannot be excluded by law.
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="section-block">
+          <span class="section-num">Section 11</span>
+          <p class="section-title-en">Suspension and Termination</p>
+          <div class="section-body-en">
+            We reserve the right to suspend or terminate your access without refund if you breach these Terms, particularly in cases of account sharing, fraud, or misuse. We will notify you by email where reasonably practicable.
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="section-block">
+          <span class="section-num">Section 12</span>
+          <p class="section-title-en">Governing Law</p>
+          <div class="section-body-en">
+            These Terms are governed by and construed in accordance with the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="section-block">
+          <span class="section-num">Section 13</span>
+          <p class="section-title-en">Changes to These Terms</p>
+          <div class="section-body-en">
+            We may update these Terms from time to time. Continued use of the Service after changes have been posted constitutes your acceptance of the revised Terms. We will notify active users by email of material changes.
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="section-block">
+          <span class="section-num">Section 14</span>
+          <p class="section-title-en">Contact</p>
+          <div class="section-body-en">
+            For any questions regarding these Terms, contact us at:<br><br>
+            <strong>Email:</strong> v.ahilan@yahoo.com<br>
+            <strong>Phone:</strong> 07392 293330<br>
+            <strong>Address:</strong> 51 Elmwood Road, Slough SL2 5QH
+          </div>
+        </div>
+
+      </div><!-- /col-body -->
+    </div><!-- /col-en -->
+
+    <!-- TAMIL COLUMN -->
+    <div class="col-ta" id="colTa">
+      <div class="col-header">
+        <span class="col-header-flag">🇮🇳</span>
+        <span class="col-header-label">மொழி</span>
+        <span class="col-header-lang tamil">தமிழ்</span>
+      </div>
+      <div class="col-body">
+
+        <!-- 1 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 1</span>
+          <p class="section-title-ta">சேவையைப் பற்றி</p>
+          <div class="section-body-ta">
+            இந்த சேவை UK இயக்க கோட்பாடு சோதனை விண்ணப்பதாரர்களுக்காக படிப்பு மேட்டீரியல்கள்/உதவி கருவிகள், பயிற்சி கேள்விகள் மற்றும் திருத்தக் கருவிகளை வழங்கும் வலை அடிப்படையிலான இயக்க கோட்பாடு பயிற்சி பயன்பாடாகும். அணுகல் 30 நாட்கள், மீண்டும் மீண்டும் வசூல் செய்யாத அடிப்படையில் வழங்கப்படுகிறது.
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 2</span>
+          <p class="section-title-ta">தகுதி</p>
+          <div class="section-body-ta">
+            இந்த சேவையை பயன்படுத்த நீங்கள் 16 வயது அல்லது அதற்கு மேல் இருக்க வேண்டும். அணுகலை வாங்குவதன் மூலம் நீங்கள் குறைந்தது 16 வயதுடையவர் என்பதை உறுதிப்படுத்துகிறீர்கள்.
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 3</span>
+          <p class="section-title-ta">கணக்கு பதிவு</p>
+          <div class="section-body-ta">
+            <ul>
+              <li>நீங்கள் சரியான மின்னஞ்சல் முகவரியை வழங்கி பாதுகாப்பான கடவுச்சொல்லை உருவாக்க வேண்டும்.</li>
+              <li>உங்கள் உள்நுழைவு தகவல்களை இரகசியமாக வைத்திருப்பது உங்கள் பொறுப்பு.</li>
+              <li>உங்கள் கணக்கின் அங்கீகரிக்கப்படாத பயன்பாடு சந்தேகிக்கப்பட்டால் உடனடியாக எங்களுக்கு தெரிவிக்க வேண்டும்.</li>
+              <li>ஒரு நபருக்கு ஒரு கணக்கு மட்டுமே; அணுகல் கட்டுப்பாட்டை தவிர்க்க பல கணக்குகளை உருவாக்கலாகாது.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 4</span>
+          <p class="section-title-ta">அணுகல் மற்றும் சாதன வரம்பு</p>
+          <div class="section-body-ta">
+            உங்கள் கொள்முதல் வாங்கிய தேதியிலிருந்து 30 நாட்களுக்கு சேவையை அணுக ஒரு தனிப்பட்ட உரிமத்தை வழங்குகிறது. பின்வரும் நிபந்தனைகள் பொருந்தும்:
+            <ul style="margin-top:10px">
+              <li>அணுகல் முற்றிலும் தனிப்பட்டது மற்றும் மாற்ற முடியாதது.</li>
+              <li>நீங்கள் அதிகபட்சம் 3 சாதனங்களில் சேவையை அணுகலாம்.</li>
+              <li>3க்கும் மேற்பட்ட சாதனங்களில் ஒரே நேரத்தில் பயன்படுத்துவது அனுமதிக்கப்படாது.</li>
+              <li>கணக்கு பகிர்வு அல்லது தவறான பயன்பாட்டை கண்டறிந்தால் அணுகலை இடைநிறுத்த அல்லது நிறுத்த எங்களுக்கு உரிமை உள்ளது.</li>
+              <li>இந்த வரம்புகளை செயல்படுத்த மற்றும் மோசடியை கண்டறிய சாதன பயன்பாடு, அமர்வு செயல்பாடு மற்றும் IP முகவரிகளை கண்காணிக்கிறோம்.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 5</span>
+          <p class="section-title-ta">தடைசெய்யப்பட்ட நடத்தை</p>
+          <div class="section-body-ta">
+            நீங்கள் செய்யக்கூடாதவை:
+            <ul style="margin-top:10px">
+              <li>உங்கள் உள்நுழைவு தகவல்களை வேறு எவரிடமும் பகிர்வது.</li>
+              <li>உங்கள் அணுகலை மூன்றாம் தரப்பினருக்கு விற்பது, உரிமம் வழங்குவது அல்லது மாற்றுவது.</li>
+              <li>சாதன வரம்புகள், அணுகல் கட்டுப்பாடுகள் அல்லது பாதுகாப்பு நடவடிக்கைகளை தவிர்க்க முயற்சிப்பது.</li>
+              <li>எங்கள் எழுத்துப்பூர்வ அனுமதி இல்லாமல் சேவையில் உள்ள எந்த உள்ளடக்கத்தையும் நகலெடுப்பது, மறுவெளியீடு செய்வது அல்லது விநியோகிப்பது.</li>
+              <li>பொருந்தக்கூடிய UK சட்டத்தை மீறும் வகையில் சேவையை பயன்படுத்துவது.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 6</span>
+          <p class="section-title-ta">கட்டணம் மற்றும் விலை நிர்ணயம்</p>
+          <div class="section-body-ta">
+            <ul>
+              <li>அனைத்து விலைகளும் GBP இல் காட்டப்படும் மற்றும் பொருந்தக்கூடிய இடங்களில் VAT சேர்க்கப்படும்.</li>
+              <li>கட்டணம் Stripe மூலம் பாதுகாப்பாக செயல்படுத்தப்படுகிறது. நாங்கள் உங்கள் கட்டண அட்டை விவரங்களை சேமிக்கவில்லை.</li>
+              <li>கட்டண உறுதிப்படுத்தல் கிடைத்தவுடன் உங்கள் 30 நாள் அணுகல் காலம் உடனடியாக தொடங்கும்.</li>
+              <li>இது ஒரு முறை கொள்முதல், சந்தாவல்ல. நீங்கள் மீண்டும் தானாக வசூல் செய்யப்பட மாட்டீர்கள்.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 7</span>
+          <p class="section-title-ta">பணம் திரும்ப மற்றும் ரத்துசெய்தல்</p>
+          <div class="section-body-ta">
+            <div class="highlight-box">
+              நுகர்வோர் ஒப்பந்தங்கள் ஒழுங்குமுறைகள் 2013 (SI 2013/3134) இன் படி, அணுகலை வாங்குவதன் மூலம் சேவையை உடனடியாக தொடங்குவதற்கு நீங்கள் வெளிப்படையாக சம்மதிக்கிறீர்கள். அணுகல் வழங்கப்பட்டவுடன் ரத்துசெய்யும் உரிமை இழக்கப்படும்.
+            </div>
+            உள்நுழைவு தகவல்கள் பெற்று சேவையை அணுகிய பிறகு, எங்களால் ஏற்படும் தொழில்நுட்ப தோல்வி தவிர வேறு எந்த சூழலிலும் பணம் திரும்ப வழங்கப்படாது. அணுகலை தடுக்கும் தொழில்நுட்ப பிரச்சினை இருந்தால், கொள்முதல் செய்த 7 நாட்களுக்குள் எங்களை தொடர்பு கொள்ளவும்.
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 8</span>
+          <p class="section-title-ta">அறிவுசார் சொத்துரிமை</p>
+          <div class="section-body-ta">
+            கேள்விகள், படங்கள், உரை மற்றும் வடிவமைப்பு உள்பட சேவையில் உள்ள அனைத்து உள்ளடக்கமும் எங்களுக்கு சொந்தமானது அல்லது உரிமம் பெற்றது. உங்கள் 30 நாள் அணுகல் காலத்தில் தனிப்பட்ட படிப்பு நோக்கங்களுக்காக மட்டுமே இந்த உள்ளடக்கத்தை அணுக வரையறுக்கப்பட்ட, பிரத்தியேகமற்ற உரிமம் வழங்கப்படுகிறது. எழுத்துப்பூர்வ அனுமதி இல்லாமல் சேவையில் உள்ள எந்த உள்ளடக்கத்தையும் மறுவெளியீடு செய்யலாகாது.
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 9</span>
+          <p class="section-title-ta">உத்தரவாத மறுப்பு</p>
+          <div class="section-body-ta">
+            சேவை திருத்தம் மற்றும் பயிற்சி நோக்கங்களுக்காக மட்டுமே வழங்கப்படுகிறது. சேவையை பயன்படுத்துவதால் அதிகாரப்பூர்வ DVSA இயக்க கோட்பாடு சோதனையில் தேர்ச்சி பெறுவதை நாங்கள் உத்தரவாதப்படுத்தவில்லை. உள்ளடக்கம் தொடர்ந்து புதுப்பிக்கப்படுகிறது ஆனால் எந்நேரத்திலும் சமீபத்திய DVSA மேட்டீரியல்களை பிரதிபலிக்கும் என்று உறுதி கூற முடியாது.
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 10</span>
+          <p class="section-title-ta">பொறுப்பு வரம்பு</p>
+          <div class="section-body-ta">
+            UK சட்டம் அனுமதிக்கும் அதிகபட்ச அளவிற்கு, சேவையை பயன்படுத்துவதால் ஏற்படும் மறைமுக, தற்செயல் அல்லது விளைவு இழப்புக்கு நாங்கள் பொறுப்பாக மாட்டோம். உங்களுக்கு எங்கள் மொத்த பொறுப்பு, நீங்கள் தற்போதைய 30 நாள் அணுகல் காலத்திற்கு செலுத்திய தொகையை மீறாது. அலட்சியத்தால் ஏற்படும் மரணம் அல்லது உடல் காயத்திற்கான பொறுப்பை இந்த விதிமுறைகள் எதுவும் வரம்பிடாது.
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 11</span>
+          <p class="section-title-ta">இடைநிறுத்தம் மற்றும் நிறுத்தம்</p>
+          <div class="section-body-ta">
+            கணக்கு பகிர்வு, மோசடி அல்லது தவறான பயன்பாடு போன்ற விதிமுறை மீறல்கள் இருந்தால் பணம் திரும்ப வழங்காமல் அணுகலை இடைநிறுத்த அல்லது நிறுத்த எங்களுக்கு உரிமை உள்ளது. நடைமுறையில் சாத்தியமான இடங்களில் மின்னஞ்சல் மூலம் உங்களுக்கு தெரிவிப்போம்.
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 12</span>
+          <p class="section-title-ta">ஆளும் சட்டம்</p>
+          <div class="section-body-ta">
+            இந்த விதிமுறைகள் இங்கிலாந்து மற்றும் வேல்ஸ் சட்டங்களின் படி நிர்வகிக்கப்படும். எந்த தகராறும் இங்கிலாந்து மற்றும் வேல்ஸ் நீதிமன்றங்களின் பிரத்தியேக அதிகார வரம்பிற்கு உட்பட்டது.
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 13</span>
+          <p class="section-title-ta">விதிமுறை மாற்றங்கள்</p>
+          <div class="section-body-ta">
+            இந்த விதிமுறைகளை எப்போதாவது புதுப்பிக்கலாம். மாற்றங்கள் வெளியிடப்பட்ட பிறகு சேவையை தொடர்ந்து பயன்படுத்துவது திருத்தப்பட்ட விதிமுறைகளை ஏற்றுக்கொண்டதாக கருதப்படும். முக்கியமான மாற்றங்களை மின்னஞ்சல் மூலம் செயலில் உள்ள பயனர்களுக்கு தெரிவிப்போம்.
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="section-block">
+          <span class="section-num">பிரிவு 14</span>
+          <p class="section-title-ta">தொடர்பு</p>
+          <div class="section-body-ta">
+            இந்த விதிமுறைகள் குறித்த கேள்விகளுக்கு எங்களை தொடர்பு கொள்ளவும்:<br><br>
+            <strong>மின்னஞ்சல்:</strong> v.ahilan@yahoo.com<br>
+            <strong>தொலைபேசி:</strong> 07392 293330<br>
+            <strong>முகவரி:</strong> 51 Elmwood Road, Slough SL2 5QH
+          </div>
+        </div>
+
+      </div><!-- /col-body -->
+    </div><!-- /col-ta -->
+
+  </div><!-- /bilingual-grid -->
+</div><!-- /content-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links-row">
+    <a href="tamil-driving-theory-landing.html">Home</a>
+    <a href="terms.html">Terms &amp; Conditions</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <p>&copy; 2026 Tamil Car Driving Theory. All rights reserved. &nbsp;·&nbsp; Not affiliated with DVSA.</p>
+</footer>
+
+<script>
+function showLang(lang) {
+  const colEn = document.getElementById('colEn');
+  const colTa = document.getElementById('colTa');
+  const btns = document.querySelectorAll('.toggle-btn');
+  btns.forEach(b => b.classList.remove('active'));
+
+  if (lang === 'en') {
+    colEn.classList.remove('hide');
+    colTa.classList.add('hide');
+    btns[1].classList.add('active');
+  } else if (lang === 'ta') {
+    colEn.classList.add('hide');
+    colTa.classList.remove('hide');
+    btns[2].classList.add('active');
+  } else {
+    colEn.classList.remove('hide');
+    colTa.classList.remove('hide');
+    btns[0].classList.add('active');
+  }
+}
+</script>
+</body>
+</html>

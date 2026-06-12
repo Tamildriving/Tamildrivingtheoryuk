@@ -227,6 +227,43 @@
       </div>
     </div>
 
+    <!-- THEORY TEST CTA -->
+    <div style="
+      background: linear-gradient(135deg, #1a0a0a, #1a1000);
+      border: 1px solid #3a1a1a;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    ">
+      <div>
+        <div style="font-family:'Poppins',sans-serif; font-size:20px; font-weight:700; margin-bottom:6px;">
+          🚦 Theory Test Practice
+        </div>
+        <div style="color:var(--muted); font-size:14px; margin-bottom:4px;">758 DVSA revision questions · Quiz & Study modes</div>
+        <div style="color:var(--muted); font-size:13px;">3 free quizzes included · Unlimited access available</div>
+      </div>
+      <a href="theory-test.html" style="
+        display: inline-block;
+        padding: 13px 28px;
+        background: linear-gradient(135deg, var(--red), var(--orange));
+        color: #fff;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: opacity 0.2s;
+      " onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        Start Practising →
+      </a>
+    </div>
+
     <!-- PROFILE EDITOR -->
     <div class="profile-card">
       <div class="profile-header">
@@ -266,7 +303,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const { createClient } = supabase;
-  const sb = createClient('YOUR_PROJECT_URL', 'YOUR_ANON_KEY');
+  const sb = createClient('https://zsndliggnwsqnnynxqrs.supabase.co', 'sb_publishable_7KqXv-5057f9dc9H4_WV0w_3_E3d_pX');
 
   let currentUser = null;
 

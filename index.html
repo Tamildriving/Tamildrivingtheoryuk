@@ -570,6 +570,141 @@
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* ── AUTH MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.6);
+      overflow: hidden;
+      animation: modalIn .25s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(.94) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, var(--surface2), var(--surface));
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .modal-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem; color: var(--accent); margin-bottom: 4px;
+    }
+    .modal-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem; color: var(--text);
+    }
+    .modal-sub { font-size: .78rem; color: var(--text3); margin-top: 3px; }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; cursor: pointer; color: var(--text2);
+      transition: background .15s;
+    }
+    .modal-close:hover { background: var(--border); color: var(--text); }
+
+    .modal-body { padding: 24px; }
+
+    /* Tab switcher */
+    .auth-tabs {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--surface2); border-radius: 10px;
+      padding: 3px; gap: 2px; margin-bottom: 22px;
+    }
+    .auth-tab {
+      padding: 9px; text-align: center;
+      font-size: .82rem; font-weight: 700;
+      border-radius: 8px; cursor: pointer;
+      color: var(--text3); transition: all .2s;
+      border: none; background: transparent;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .auth-tab.active {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 2px 10px rgba(224,123,42,.3);
+    }
+
+    /* Form panels */
+    .auth-panel { display: none; }
+    .auth-panel.active { display: block; }
+
+    .field-group { margin-bottom: 14px; }
+    .field-label {
+      display: block; font-size: .75rem; font-weight: 700;
+      color: var(--text2); margin-bottom: 6px;
+    }
+    .field-input {
+      width: 100%; background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px; padding: 11px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem; color: var(--text);
+      transition: border-color .2s;
+      outline: none;
+    }
+    .field-input:focus { border-color: var(--accent); }
+    .field-input::placeholder { color: var(--text3); }
+
+    .field-row {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 6px;
+    }
+    .forgot-link {
+      font-size: .73rem; color: var(--accent);
+      background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: underline; padding: 0;
+    }
+    .forgot-link:hover { color: var(--gold); }
+
+    .auth-submit {
+      width: 100%; padding: 13px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+      color: #fff; border: none; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800; font-size: .92rem;
+      cursor: pointer; margin-top: 6px;
+      box-shadow: 0 4px 18px rgba(224,123,42,.3);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .auth-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(224,123,42,.4); }
+    .auth-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    .auth-message {
+      margin-top: 12px; padding: 10px 13px;
+      border-radius: 8px; font-size: .8rem;
+      display: none;
+    }
+    .auth-message.error   { background: rgba(224,60,60,.12); color: #f87171; border: 1px solid rgba(224,60,60,.25); display: block; }
+    .auth-message.success { background: rgba(34,168,90,.12); color: #4ade80; border: 1px solid rgba(34,168,90,.25); display: block; }
+
+    /* Forgot password panel */
+    .back-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--text3); font-size: .8rem;
+      font-family: 'DM Sans', sans-serif;
+      display: flex; align-items: center; gap: 5px;
+      padding: 0; margin-bottom: 18px;
+    }
+    .back-btn:hover { color: var(--text); }
   </style>
 </head>
 <body>
@@ -578,7 +713,7 @@
   <!-- ── NAV BAR ── -->
   <nav class="nav-bar">
     <div class="nav-logo">Tamil Car Driving Theory UK<span class="ta" style="font-size:.68rem;letter-spacing:0;margin-top:1px">தமிழ் கோட்பாட்டு தேர்வு</span></div>
-    <a href="theory-test.html" class="nav-cta">Open App →<span class="ta" style="color:rgba(255,255,255,.8);font-size:.68rem">செயலியைத் திற</span></a>
+    <button onclick="openAuthModal()" class="nav-cta">Login / Register →<span class="ta" style="color:rgba(255,255,255,.8);font-size:.68rem">உள்நுழைய / பதிவு</span></button>
   </nav>
 
   <!-- ══════════════════════════════════════
@@ -605,9 +740,9 @@
       </p>
 
       <div class="hero-ctas">
-        <a href="theory-test.html" class="btn-primary">
+        <button onclick="openAuthModal()" class="btn-primary">
           🎯 Start Free Trial<span class="ta" style="color:rgba(255,255,255,.8)">இலவச சோதனையை தொடங்குங்கள்</span>
-        </a>
+        </button>
         <a href="#features" class="btn-secondary">
           See features ↓<span class="ta">அம்சங்களை பாருங்கள்</span>
         </a>
@@ -1033,9 +1168,9 @@
             <strong>30-day full access · £12.12 · one-time payment<span class="ta" style="font-weight:400;font-size:.85em">30 நாள் முழு அணுகல் · £12.12 · ஒரு முறை கட்டணம்</span></strong>
             <p style="font-size:.72rem;color:var(--text3);margin-top:3px">Apple Pay · Google Pay · Visa · Mastercard via Stripe</p>
           </div>
-          <a href="theory-test.html" class="advert-btn">
+          <button onclick="openAuthModal()" class="advert-btn">
             🎯 Start Free Trial<span class="ta" style="color:rgba(255,255,255,.8)">இலவச சோதனையை தொடங்குங்கள்</span>
-          </a>
+          </button>
         </div>
 
         <!-- ── MANDATORY CROWN COPYRIGHT NOTICE ──
@@ -1095,6 +1230,293 @@
   </footer>
 
 </div><!-- /shell -->
+
+<!-- ── AUTH MODAL ── -->
+<div class="modal-overlay" id="authModal" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-logo">🚗 Tamil Driving Theory</div>
+      <div class="modal-title" id="modalTitle">Welcome back</div>
+      <div class="modal-sub" id="modalSub">Sign in to continue your revision</div>
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Tab switcher (hidden in forgot-pw view) -->
+      <div class="auth-tabs" id="authTabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">
+          Login<span class="ta-sm">உள்நுழைவு</span>
+        </button>
+        <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">
+          Register<span class="ta-sm">பதிவு</span>
+        </button>
+      </div>
+
+      <!-- LOGIN PANEL -->
+      <div class="auth-panel active" id="panelLogin">
+        <div class="field-group">
+          <label class="field-label" for="loginEmail">Email address<span class="ta-sm">மின்னஞ்சல்</span></label>
+          <input class="field-input" type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field-group">
+          <div class="field-row">
+            <label class="field-label" for="loginPassword" style="margin-bottom:0">Password<span class="ta-sm">கடவுச்சொல்</span></label>
+            <button class="forgot-link" onclick="showForgotPanel()">Forgot password?<span class="ta-sm"> மறந்துவிட்டீர்களா?</span></button>
+          </div>
+          <input class="field-input" type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" style="margin-top:6px">
+        </div>
+        <button class="auth-submit" id="loginBtn" onclick="doLogin()">
+          Sign In →<span class="ta-sm" style="color:rgba(255,255,255,.8)">உள்நுழைய</span>
+        </button>
+        <div class="auth-message" id="loginMsg"></div>
+      </div>
+
+      <!-- REGISTER PANEL -->
+      <div class="auth-panel" id="panelRegister">
+        <div class="field-group">
+          <label class="field-label" for="regEmail">Email address<span class="ta-sm">மின்னஞ்சல்</span></label>
+          <input class="field-input" type="email" id="regEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="regPassword">Password (min 8 characters)<span class="ta-sm">கடவுச்சொல் (குறைந்தது 8 எழுத்துகள்)</span></label>
+          <input class="field-input" type="password" id="regPassword" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="regConfirm">Confirm password<span class="ta-sm">கடவுச்சொல்லை உறுதிப்படுத்தவும்</span></label>
+          <input class="field-input" type="password" id="regConfirm" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <button class="auth-submit" id="regBtn" onclick="doRegister()">
+          Create Account →<span class="ta-sm" style="color:rgba(255,255,255,.8)">கணக்கு உருவாக்கவும்</span>
+        </button>
+        <div class="auth-message" id="regMsg"></div>
+      </div>
+
+      <!-- FORGOT PASSWORD PANEL -->
+      <div class="auth-panel" id="panelForgot">
+        <button class="back-btn" onclick="showLoginPanel()">← Back to login<span class="ta-sm"> உள்நுழைவுக்கு திரும்பவும்</span></button>
+        <div class="field-group">
+          <label class="field-label" for="forgotEmail">Your email address<span class="ta-sm">உங்கள் மின்னஞ்சல்</span></label>
+          <input class="field-input" type="email" id="forgotEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <button class="auth-submit" id="forgotBtn" onclick="doForgotPassword()">
+          Send Reset Link<span class="ta-sm" style="color:rgba(255,255,255,.8)"> மீட்டமைப்பு இணைப்பை அனுப்பவும்</span>
+        </button>
+        <div class="auth-message" id="forgotMsg"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'https://YOUR-BACKEND-URL.example.com'; // TODO: replace with your deployed Express backend URL (same as CONFIG_API.API_BASE in theory-test.html)
+
+  function openAuthModal(tab) {
+    const modal = document.getElementById('authModal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    switchTab(tab || 'login');
+  }
+  function closeAuthModal() {
+    document.getElementById('authModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('authModal')) closeAuthModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAuthModal(); });
+
+  function switchTab(tab) {
+    // Show tabs, hide forgot
+    document.getElementById('authTabs').style.display = 'grid';
+    document.getElementById('panelForgot').classList.remove('active');
+
+    if (tab === 'login') {
+      document.getElementById('panelLogin').classList.add('active');
+      document.getElementById('panelRegister').classList.remove('active');
+      document.getElementById('tabLogin').classList.add('active');
+      document.getElementById('tabRegister').classList.remove('active');
+      document.getElementById('modalTitle').textContent = 'Welcome back';
+      document.getElementById('modalSub').textContent = 'Sign in to continue your revision';
+    } else {
+      document.getElementById('panelRegister').classList.add('active');
+      document.getElementById('panelLogin').classList.remove('active');
+      document.getElementById('tabRegister').classList.add('active');
+      document.getElementById('tabLogin').classList.remove('active');
+      document.getElementById('modalTitle').textContent = 'Create your account';
+      document.getElementById('modalSub').textContent = 'Free to register — start with 3 free quizzes';
+    }
+  }
+
+  function showForgotPanel() {
+    document.getElementById('authTabs').style.display = 'none';
+    document.getElementById('panelLogin').classList.remove('active');
+    document.getElementById('panelRegister').classList.remove('active');
+    document.getElementById('panelForgot').classList.add('active');
+    document.getElementById('modalTitle').textContent = 'Reset password';
+    document.getElementById('modalSub').textContent = "We'll email you a reset link";
+    // Pre-fill email from login field
+    const loginEmail = document.getElementById('loginEmail').value;
+    if (loginEmail) document.getElementById('forgotEmail').value = loginEmail;
+  }
+
+  function showLoginPanel() {
+    switchTab('login');
+  }
+
+  function setMsg(id, type, text) {
+    const el = document.getElementById(id);
+    el.className = 'auth-message ' + type;
+    el.textContent = text;
+  }
+  function clearMsg(id) {
+    const el = document.getElementById(id);
+    el.className = 'auth-message';
+    el.textContent = '';
+  }
+
+  async function doLogin() {
+    const email    = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const btn      = document.getElementById('loginBtn');
+    clearMsg('loginMsg');
+
+    if (!email || !password) {
+      setMsg('loginMsg', 'error', 'Please enter your email and password.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Signing in…';
+
+    try {
+      const res = await fetch(API + '/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        const msgs = {
+          INVALID_CREDENTIALS: 'Incorrect email or password.',
+          EMAIL_AND_PASSWORD_REQUIRED: 'Please enter your email and password.',
+        };
+        setMsg('loginMsg', 'error', msgs[data.error] || 'Login failed. Please try again.');
+      } else {
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('auth_user', JSON.stringify(data.user));
+        setMsg('loginMsg', 'success', '✓ Signed in! Redirecting…');
+        setTimeout(() => { window.location.href = 'theory-test.html'; }, 700);
+      }
+    } catch (err) {
+      setMsg('loginMsg', 'error', 'Network error. Please check your connection.');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = 'Sign In →<span class="ta-sm" style="color:rgba(255,255,255,.8)">உள்நுழைய</span>';
+  }
+
+  async function doRegister() {
+    const email    = document.getElementById('regEmail').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const confirm  = document.getElementById('regConfirm').value;
+    const btn      = document.getElementById('regBtn');
+    clearMsg('regMsg');
+
+    if (!email || !password) {
+      setMsg('regMsg', 'error', 'Please fill in all fields.');
+      return;
+    }
+    if (password.length < 8) {
+      setMsg('regMsg', 'error', 'Password must be at least 8 characters.');
+      return;
+    }
+    if (password !== confirm) {
+      setMsg('regMsg', 'error', 'Passwords do not match.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Creating account…';
+
+    try {
+      const res = await fetch(API + '/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        const msgs = {
+          EMAIL_ALREADY_REGISTERED: 'That email is already registered. Please log in instead.',
+          EMAIL_AND_PASSWORD_REQUIRED: 'Please fill in all fields.',
+        };
+        setMsg('regMsg', 'error', msgs[data.error] || 'Registration failed. Please try again.');
+      } else {
+        // Auto-login after signup
+        setMsg('regMsg', 'success', '✓ Account created! Signing you in…');
+        const loginRes = await fetch(API + '/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        const loginData = await loginRes.json();
+        if (loginRes.ok) {
+          localStorage.setItem('authToken', loginData.token);
+          localStorage.setItem('auth_user', JSON.stringify(loginData.user));
+          setTimeout(() => { window.location.href = 'theory-test.html'; }, 900);
+        } else {
+          setMsg('regMsg', 'success', '✓ Account created! Please log in.');
+          setTimeout(() => switchTab('login'), 1500);
+        }
+      }
+    } catch (err) {
+      setMsg('regMsg', 'error', 'Network error. Please check your connection.');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = 'Create Account →<span class="ta-sm" style="color:rgba(255,255,255,.8)">கணக்கு உருவாக்கவும்</span>';
+  }
+
+  async function doForgotPassword() {
+    const email = document.getElementById('forgotEmail').value.trim();
+    const btn   = document.getElementById('forgotBtn');
+    clearMsg('forgotMsg');
+
+    if (!email) {
+      setMsg('forgotMsg', 'error', 'Please enter your email address.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(API + '/api/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      // Always show success to avoid email enumeration
+      setMsg('forgotMsg', 'success', '✓ If that email is registered, a reset link has been sent. Check your inbox.');
+    } catch (err) {
+      setMsg('forgotMsg', 'error', 'Network error. Please try again.');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = 'Send Reset Link<span class="ta-sm" style="color:rgba(255,255,255,.8)"> மீட்டமைப்பு இணைப்பை அனுப்பவும்</span>';
+  }
+
+  // Allow Enter key to submit
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    if (document.getElementById('panelLogin').classList.contains('active'))    doLogin();
+    else if (document.getElementById('panelRegister').classList.contains('active')) doRegister();
+    else if (document.getElementById('panelForgot').classList.contains('active'))   doForgotPassword();
+  });
+</script>
 
 <script>
   // ── Animate progress fills on scroll into view ────────────

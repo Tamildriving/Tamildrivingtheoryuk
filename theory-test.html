@@ -1298,6 +1298,98 @@
         </div>
     </div>
 
+<!-- ═══ PANEL 5 – SETTINGS ═══ -->
+  <div class="tab-panel" id="panel5">
+    <div class="settings-card">
+      <div class="settings-section">
+        <h3>🎨 Appearance</h3>
+        <div class="setting-row">
+          <div><div class="setting-label">Dark Mode</div><div class="setting-sub">Switch to dark theme</div></div>
+          <div class="setting-ctrl"><label class="toggle"><input type="checkbox" id="darkModeToggle" onchange="applyTheme()"><span class="toggle-slider"></span></label></div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <h3>🌐 Language</h3>
+        <div class="setting-row">
+          <div><div class="setting-label">Display Language</div><div class="setting-sub">Which translations to show</div></div>
+          <div class="setting-ctrl">
+            <select class="setting-select" id="langSelect">
+              <option value="both">English + Tamil</option>
+              <option value="en">English Only</option>
+              <option value="ta">Tamil Only</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <h3>⏱ Timer</h3>
+        <div class="setting-row">
+          <div><div class="setting-label">Default Seconds</div><div class="setting-sub">Auto-next delay per question</div></div>
+          <div class="setting-ctrl"><input class="setting-num" type="number" id="defaultTimer" min="1" max="300" value="5"></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Auto-reveal Answer</div><div class="setting-sub">Show answer when timer expires</div></div>
+          <div class="setting-ctrl"><label class="toggle"><input type="checkbox" id="autoReveal" checked><span class="toggle-slider"></span></label></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>📂 Category Filter (Study Mode)</h3>
+        <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px">
+          <div>
+            <div class="setting-label">Select Category</div>
+            <div class="setting-sub">Filter study mode to a specific topic</div>
+          </div>
+          <div class="category-select-wrap" style="width:100%">
+            <select id="categorySelect">
+              <option value="all">All Questions (1 – 758)</option>
+              <option value="1-26">Alertness (Q1 – Q26)</option>
+              <option value="27-64">Attitude (Q27 – Q64)</option>
+              <option value="65-146">Safety and your vehicle / motorcycle (Q65 – Q146)</option>
+              <option value="147-180">Safety margins (Q147 – Q180)</option>
+              <option value="181-258">Hazard awareness (Q181 – Q258)</option>
+              <option value="259-329">Vulnerable road users (Q259 – Q329)</option>
+              <option value="330-351">Other types of vehicle (Q330 – Q351)</option>
+              <option value="352-367">Vehicle / motorcycle handling (Q352 – Q367)</option>
+              <option value="368-396">Vehicle handling (Q368 – Q396)</option>
+              <option value="397-453">Motorway rules (Q397 – Q453)</option>
+              <option value="454-520">Rules of the road (Q454 – Q520)</option>
+              <option value="521-654">Road and traffic signs (Q521 – Q654)</option>
+              <option value="655-681">Essential documents (Q655 – Q681)</option>
+              <option value="682-729">Incidents, accidents and emergencies (Q682 – Q729)</option>
+              <option value="730-750">Vehicle / motorcycle loading (Q730 – Q750)</option>
+              <option value="751-758">Incidents, accidents and emergencies 2 (Q751 – Q758)</option>
+            </select>
+            <div class="category-hint">💡 Quiz tab always uses a 50-question proportional mix from all categories.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>📚 Study Question Range</h3>
+        <div class="setting-row">
+          <div><div class="setting-label">Start Question</div><div class="setting-sub">First question to include</div></div>
+          <div class="setting-ctrl"><input class="setting-num" type="number" id="qStart" min="1" max="758" value="1"></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">End Question</div><div class="setting-sub">Last question to include</div></div>
+          <div class="setting-ctrl"><input class="setting-num" type="number" id="qEnd" min="1" max="758" value="758"></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Shuffle Questions</div><div class="setting-sub">Randomise order each session</div></div>
+          <div class="setting-ctrl"><label class="toggle"><input type="checkbox" id="shuffleToggle"><span class="toggle-slider"></span></label></div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <!-- Images section removed -->
+        <input type="hidden" id="showImages" value="true">
+        <input type="hidden" id="imagesPath" value="images">
+        <button class="save-btn" onclick="saveSettings()">💾 Save &amp; Apply Settings</button>
+        <div class="save-toast" id="saveToast">✅ Settings saved and applied!</div>
+      </div>
+    </div>
+  </div>
+
 <!-- /shell -->
 
 <!-- Screen print overlay: REMOVED -->
@@ -1434,7 +1526,7 @@
       if (!email || !password) { msg.textContent = 'Enter email and password.'; return; }
       try {
         const data = await apiFetch('/api/login', { method: 'POST', body: JSON.stringify({ email, password }) });
-        setAuth(data.token, data.email);
+        setAuth(data.token, data.user && data.user.email);
         await refreshAccessAndQuestions();
         syncUI();
         if (isFullyUnlocked()) { applyUnlock(false); } else if (hasAcceptedTerms()) { applyTrial(false); }
@@ -1455,11 +1547,10 @@
       if (password.length < 8) { msg.textContent = 'Password must be at least 8 characters.'; return; }
       try {
         const data = await apiFetch('/api/signup', { method: 'POST', body: JSON.stringify({ email, password }) });
-        setAuth(data.token, data.email);
-        await refreshAccessAndQuestions();
-        syncUI();
         msg.style.color = 'var(--accent2)';
-        msg.textContent = 'Account created! You can now purchase 30-day access.';
+        msg.textContent = 'Account created! Logging you in...';
+        await doLogin();
+        return;
       } catch (e) {
         msg.textContent = e.message;
       }
@@ -1521,8 +1612,30 @@
       });
       let data = null;
       try { data = await res.json(); } catch (e) {}
+      if (res.status === 401 && data) {
+        if (data.error === 'SESSION_REVOKED') {
+          handleSessionRevoked();
+        } else if (authToken) {
+          doLocalLogout();
+        }
+      }
       if (!res.ok) throw new Error((data && data.error) || ('Request failed (' + res.status + ')'));
       return data;
+    }
+
+    function doLocalLogout() {
+      clearAuth();
+      ALL_QUESTIONS = [];
+      syncUI();
+    }
+
+    function handleSessionRevoked() {
+      doLocalLogout();
+      alert(
+        'You have been logged out because your account was used to log in ' +
+        'on another device. Only one device can be active at a time.'
+      );
+      switchTab(0);
     }
 
     function setAuth(token, email) {
@@ -1571,7 +1684,8 @@
     async function loadQuestions() {
       try {
         const path = isFullyUnlocked() ? '/api/questions/full' : '/api/questions/preview';
-        ALL_QUESTIONS = await apiFetch(path);
+        const data = await apiFetch(path);
+        ALL_QUESTIONS = (data && data.questions) || [];
       } catch (e) {
         console.error('Failed to load questions:', e);
         ALL_QUESTIONS = [];
@@ -2505,99 +2619,17 @@ initLiveCounter();
     window.history.replaceState({}, '', url.toString());
   }
 })();
+
+// Periodically re-check session validity so a login on another device
+// (which revokes this session) is detected within ~60 seconds.
+setInterval(() => {
+  if (authToken) {
+    apiFetch('/api/me').catch(() => {});
+  }
+}, 60000);
+
 </script>
 
-<!-- ═══ PANEL 5 – SETTINGS ═══ -->
-  <div class="tab-panel" id="panel5">
-    <div class="settings-card">
-      <div class="settings-section">
-        <h3>🎨 Appearance</h3>
-        <div class="setting-row">
-          <div><div class="setting-label">Dark Mode</div><div class="setting-sub">Switch to dark theme</div></div>
-          <div class="setting-ctrl"><label class="toggle"><input type="checkbox" id="darkModeToggle" onchange="applyTheme()"><span class="toggle-slider"></span></label></div>
-        </div>
-      </div>
-      <div class="settings-section">
-        <h3>🌐 Language</h3>
-        <div class="setting-row">
-          <div><div class="setting-label">Display Language</div><div class="setting-sub">Which translations to show</div></div>
-          <div class="setting-ctrl">
-            <select class="setting-select" id="langSelect">
-              <option value="both">English + Tamil</option>
-              <option value="en">English Only</option>
-              <option value="ta">Tamil Only</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="settings-section">
-        <h3>⏱ Timer</h3>
-        <div class="setting-row">
-          <div><div class="setting-label">Default Seconds</div><div class="setting-sub">Auto-next delay per question</div></div>
-          <div class="setting-ctrl"><input class="setting-num" type="number" id="defaultTimer" min="1" max="300" value="5"></div>
-        </div>
-        <div class="setting-row">
-          <div><div class="setting-label">Auto-reveal Answer</div><div class="setting-sub">Show answer when timer expires</div></div>
-          <div class="setting-ctrl"><label class="toggle"><input type="checkbox" id="autoReveal" checked><span class="toggle-slider"></span></label></div>
-        </div>
-      </div>
-
-      <div class="settings-section">
-        <h3>📂 Category Filter (Study Mode)</h3>
-        <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px">
-          <div>
-            <div class="setting-label">Select Category</div>
-            <div class="setting-sub">Filter study mode to a specific topic</div>
-          </div>
-          <div class="category-select-wrap" style="width:100%">
-            <select id="categorySelect">
-              <option value="all">All Questions (1 – 758)</option>
-              <option value="1-26">Alertness (Q1 – Q26)</option>
-              <option value="27-64">Attitude (Q27 – Q64)</option>
-              <option value="65-146">Safety and your vehicle / motorcycle (Q65 – Q146)</option>
-              <option value="147-180">Safety margins (Q147 – Q180)</option>
-              <option value="181-258">Hazard awareness (Q181 – Q258)</option>
-              <option value="259-329">Vulnerable road users (Q259 – Q329)</option>
-              <option value="330-351">Other types of vehicle (Q330 – Q351)</option>
-              <option value="352-367">Vehicle / motorcycle handling (Q352 – Q367)</option>
-              <option value="368-396">Vehicle handling (Q368 – Q396)</option>
-              <option value="397-453">Motorway rules (Q397 – Q453)</option>
-              <option value="454-520">Rules of the road (Q454 – Q520)</option>
-              <option value="521-654">Road and traffic signs (Q521 – Q654)</option>
-              <option value="655-681">Essential documents (Q655 – Q681)</option>
-              <option value="682-729">Incidents, accidents and emergencies (Q682 – Q729)</option>
-              <option value="730-750">Vehicle / motorcycle loading (Q730 – Q750)</option>
-              <option value="751-758">Incidents, accidents and emergencies 2 (Q751 – Q758)</option>
-            </select>
-            <div class="category-hint">💡 Quiz tab always uses a 50-question proportional mix from all categories.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="settings-section">
-        <h3>📚 Study Question Range</h3>
-        <div class="setting-row">
-          <div><div class="setting-label">Start Question</div><div class="setting-sub">First question to include</div></div>
-          <div class="setting-ctrl"><input class="setting-num" type="number" id="qStart" min="1" max="758" value="1"></div>
-        </div>
-        <div class="setting-row">
-          <div><div class="setting-label">End Question</div><div class="setting-sub">Last question to include</div></div>
-          <div class="setting-ctrl"><input class="setting-num" type="number" id="qEnd" min="1" max="758" value="758"></div>
-        </div>
-        <div class="setting-row">
-          <div><div class="setting-label">Shuffle Questions</div><div class="setting-sub">Randomise order each session</div></div>
-          <div class="setting-ctrl"><label class="toggle"><input type="checkbox" id="shuffleToggle"><span class="toggle-slider"></span></label></div>
-        </div>
-      </div>
-      <div class="settings-section">
-        <!-- Images section removed -->
-        <input type="hidden" id="showImages" value="true">
-        <input type="hidden" id="imagesPath" value="images">
-        <button class="save-btn" onclick="saveSettings()">💾 Save &amp; Apply Settings</button>
-        <div class="save-toast" id="saveToast">✅ Settings saved and applied!</div>
-      </div>
-    </div>
-  </div>
 
 </div><!-- /shell -->
 </body>

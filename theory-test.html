@@ -816,8 +816,26 @@
             </p>
         </div>
 
-        <div class="copy-body">
-            <!-- Crown Copyright Acknowledgement -->
+        <!-- ── Login / Signup Panel ── -->
+        <div id="authPanel" style="margin:16px 22px; padding:14px; border:1px solid var(--border, #ddd); border-radius:10px;">
+          <div id="authLoggedOut">
+            <div style="display:flex; gap:8px; margin-bottom:10px;">
+              <button id="authTabLogin" onclick="showAuthPanel('login')" class="unlock-btn" style="flex:1; padding:8px;">Log In</button>
+              <button id="authTabSignup" onclick="showAuthPanel('signup')" class="unlock-btn" style="flex:1; padding:8px;">Sign Up</button>
+            </div>
+            <input id="authEmail" type="email" placeholder="Email" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
+            <input id="authPassword" type="password" placeholder="Password" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
+            <button id="authSubmitBtn" onclick="submitAuth()" class="unlock-btn" style="width:100%; padding:8px;">Log In</button>
+            <div id="authError" style="color:#e03c3c; font-size:.8rem; margin-top:6px;"></div>
+          </div>
+          <div id="authLoggedIn" style="display:none;">
+            <p style="margin:0 0 8px;">Logged in as <strong id="authEmailDisplay"></strong></p>
+            <p id="authAccessStatus" style="margin:0 0 8px; font-size:.85rem;"></p>
+            <button onclick="doLogout()" class="unlock-btn" style="padding:6px 14px;">Log Out</button>
+          </div>
+        </div>
+
+
             <h3>👑 அரசு பதிப்புரிமை அங்கீகாரம் / Crown Copyright Acknowledgement</h3>
             <p>
                 DVSA அரசு பதிப்புரிமைக்கு உட்பட்ட உள்ளடக்கத்தை மீண்டும் உருவாக்க அனுமதி அளித்துள்ளது. இந்த மீண்டும் உருவாக்கத்தின் துல்லியத்திற்கு DVSA பொறுப்பேற்காது.
@@ -1063,30 +1081,6 @@
             <button class="unlock-btn" id="unlockBtn" onclick="unlock()">✅ ஏற்று தொடரவும் / Accept &amp; Start Free Trial (3 quizzes)</button>
             <div class="unlocked-msg" id="unlockedMsg">✅ அணுகல் வழங்கப்பட்டது / Access Granted</div>
         </div>
-
-        <!-- ── ACCOUNT / LOGIN ── -->
-        <div class="copy-body" id="authPanel">
-            <h3>👤 Account</h3>
-            <div id="authLoggedOut">
-                <p style="margin-bottom:10px;">Log in or create an account to purchase 30-day access and have it follow you across devices.</p>
-                <div style="display:flex;flex-direction:column;gap:8px;max-width:320px;">
-                    <input type="email" id="authEmail" placeholder="Email" autocomplete="email"
-                        style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-family:inherit;font-size:.85rem;">
-                    <input type="password" id="authPassword" placeholder="Password (min 8 characters)" autocomplete="current-password"
-                        style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font-family:inherit;font-size:.85rem;">
-                    <div style="display:flex;gap:8px;">
-                        <button onclick="doLogin()" style="flex:1;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem;">Log In</button>
-                        <button onclick="doSignup()" style="flex:1;padding:10px;background:var(--surface2);color:var(--text);border:1.5px solid var(--border);border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem;">Sign Up</button>
-                    </div>
-                    <div id="authMsg" style="font-size:.78rem;color:var(--danger);min-height:1.2em;"></div>
-                </div>
-            </div>
-            <div id="authLoggedIn" style="display:none;">
-                <p>Logged in as <strong id="authEmailDisplay"></strong></p>
-                <p id="authAccessStatus" style="margin-top:4px;color:var(--text3);font-size:.82rem;"></p>
-                <button onclick="logout()" style="margin-top:10px;padding:8px 16px;background:var(--surface2);color:var(--text);border:1.5px solid var(--border);border-radius:8px;font-weight:700;cursor:pointer;font-size:.82rem;">Log Out</button>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -1120,14 +1114,14 @@
                     <li>Works on iPhone, Android, tablet &amp; desktop</li>
                     <li>No app download required — pure web</li>
                 </ul>
-                <button id="stripePayBtn" class="stripe-btn" onclick="openSubscribe()" style="border:none;cursor:pointer;width:100%;">
+                <a id="stripePayBtn" class="stripe-btn" href="javascript:void(0)" onclick="openSubscribe()">
                     💳 Pay £12.12 — Get 30-Day Access
-                </button>
+                </a>
                 <div class="stripe-secure">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
                     Secured by Stripe · Apple Pay &amp; Google Pay accepted
                 </div>
-                <p class="no-sub-note" id="paywallAuthNote">Not logged in — <button onclick="switchTab(0); document.getElementById('authPanel').scrollIntoView({behavior:'smooth'})" style="background:none;border:none;color:var(--accent);font-weight:700;cursor:pointer;font-size:.74rem;text-decoration:underline;">log in or create an account</button> first</p>
+                <p class="no-sub-note">Already paid? <button onclick="checkStripeAccess()" style="background:none;border:none;color:var(--accent);font-weight:700;cursor:pointer;font-size:.74rem;text-decoration:underline;">Click here to restore access</button></p>
             </div>
         </div>
 
@@ -1328,13 +1322,79 @@
 <!-- Screen capture/print JS protection: REMOVED -->
 
 <script>
-    // ── Backend config ──────────────────────────────────────
-    const CONFIG = {
-      // TODO: replace with your deployed backend URL, e.g. https://your-app.up.railway.app
-      API_BASE: 'https://YOUR_BACKEND_URL'
-    };
+   // Question bank is now fetched from the server based on login/access status.
+   // It never ships embedded in this file.
+   let ALL_QUESTIONS = [];
 
-    let ALL_QUESTIONS = []; // populated by loadQuestions() before app init
+   // ── Backend configuration ──────────────────────────────────
+   const CONFIG_API = {
+     // TODO: set this to your deployed backend URL, e.g. https://api.example.com
+     API_BASE: 'https://YOUR-BACKEND-URL.example.com'
+   };
+
+   // ── Auth state ──────────────────────────────────────────────
+   let authToken = null;
+   try { authToken = localStorage.getItem('authToken'); } catch(e) {}
+   let currentUser = null; // { email, access_expires_at, is_active }
+
+   async function apiFetch(path, options = {}) {
+     const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {});
+     if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
+
+     const res = await fetch(CONFIG_API.API_BASE + path, Object.assign({}, options, { headers }));
+
+     if (res.status === 401) {
+       let data = {};
+       try { data = await res.json(); } catch(e) {}
+       if (data.error === 'SESSION_REVOKED') {
+         handleSessionRevoked();
+       } else {
+         doLocalLogout();
+       }
+       throw new Error(data.error || 'UNAUTHORIZED');
+     }
+     return res;
+   }
+
+   function doLocalLogout() {
+     authToken = null;
+     currentUser = null;
+     try { localStorage.removeItem('authToken'); } catch(e) {}
+     ALL_QUESTIONS = [];
+     _fullyUnlocked = false;
+   }
+
+   function handleSessionRevoked() {
+     doLocalLogout();
+     alert('You have been logged out because your account was used to log in on another device.\nOnly one device can be signed in at a time.');
+     try { syncUI(); } catch(e) {}
+     try { switchTab(0); } catch(e) {}
+   }
+
+   // Loads /api/me (access status) and the appropriate question set
+   // (full bank if access is active, otherwise a preview) for the
+   // logged-in user. Updates _fullyUnlocked and ALL_QUESTIONS.
+   async function refreshAccessAndQuestions() {
+     if (!authToken) {
+       currentUser = null;
+       ALL_QUESTIONS = [];
+       _fullyUnlocked = false;
+       return;
+     }
+     try {
+       const meRes = await apiFetch('/api/me');
+       currentUser = await meRes.json();
+       _fullyUnlocked = !!currentUser.is_active;
+
+       const qPath = _fullyUnlocked ? '/api/questions/full' : '/api/questions/preview';
+       const qRes = await apiFetch(qPath);
+       const qData = await qRes.json();
+       ALL_QUESTIONS = qData.questions || [];
+     } catch (e) {
+       console.error('refreshAccessAndQuestions failed:', e);
+     }
+   }
+
 
     const OPTION_IMAGES = {"58": {"A": "BB1591a.gif", "B": "BB1591b.gif", "C": "BB1591c.gif", "D": "BB1591d.gif"}, "259": {"A": "AB2117a.gif", "B": "AB2117b.gif", "C": "AB2117c.gif", "D": "AB2117d.gif"}, "330": {"A": "AB2176a.gif", "B": "AB2176b.gif", "C": "AB2176c.gif", "D": "AB2176d.gif"}, "356": {"A": "AB2212a.gif", "B": "AB2212b.gif", "C": "AB2212c.gif", "D": "AB2212d.gif"}, "523": {"A": "AB2294a.gif", "B": "AB2294b.gif", "C": "AB2294c.gif", "D": "AB2294d.gif"}, "524": {"A": "AB2295a.gif", "B": "AB2295b.gif", "C": "AB2295c.gif", "D": "AB2295d.gif"}, "530": {"A": "AB2304a.gif", "B": "AB2304b.gif", "C": "AB2304c.gif", "D": "AB2304d.gif"}, "533": {"A": "AB2307a.gif", "B": "AB2307b.gif", "C": "AB2307c.gif", "D": "AB2307d.gif"}, "537": {"A": "AB2314a.gif", "B": "AB2314b.gif", "C": "AB2314c.gif", "D": "AB2314d.gif"}, "543": {"A": "AB2324a.gif", "B": "AB2324b.gif", "C": "AB2324c.gif", "D": "AB2324d.gif"}, "560": {"A": "AB2347a.gif", "B": "AB2347b.gif", "C": "AB2347c.gif", "D": "AB2347d.gif"}, "561": {"A": "AB2351a.gif", "B": "AB2351b.gif", "C": "AB2351c.gif", "D": "AB2351d.gif"}, "564": {"A": "AB2357a.gif", "B": "AB2357b.gif", "C": "AB2357c.gif", "D": "AB2357d.gif"}, "575": {"A": "AB2375a.gif", "B": "AB2375b.gif", "C": "AB2375c.gif", "D": "AB2375d.gif"}, "582": {"A": "AB2389a.gif", "B": "AB2389b.gif", "C": "AB2389c.gif", "D": "AB2389d.gif"}, "590": {"A": "AB2401a.gif", "B": "AB2401b.gif", "C": "AB2401c.gif", "D": "AB2401d.gif"}, "605": {"A": "AB2429a.gif", "B": "AB2429b.gif", "C": "AB2429c.gif", "D": "AB2429d.gif"}, "618": {"A": "AB2674a.gif", "B": "AB2674b.gif", "C": "AB2674c.gif", "D": "AB2674d.gif"}, "628": {"A": "AB2763a.gif", "B": "AB2763b.gif", "C": "AB2763c.gif", "D": "AB2763d.gif"}, "633": {"A": "AB2768a.gif", "B": "AB2768b.gif", "C": "AB2768c.gif", "D": "AB2768d.gif"}, "638": {"A": "AB2885a.gif", "B": "AB2885b.gif", "C": "AB2885c.gif", "D": "AB2885d.gif"}, "640": {"A": "AB2887a.gif", "B": "AB2887b.gif", "C": "AB2887c.gif", "D": "AB2887d.gif"}, "642": {"A": "AB2890a.gif", "B": "AB2890b.gif", "C": "AB2890c.gif", "D": "AB2890d.gif"}, "643": {"A": "AB2892n1a.gif", "B": "AB2892n1b.gif", "C": "AB2892n1c.gif", "D": "AB2892n1d.gif"}, "644": {"A": "AB2897a.gif", "B": "AB2897b.gif", "C": "AB2897c.gif", "D": "AB2897d.gif"}, "650": {"A": "BB1237n1a.gif", "B": "BB1237n1b.gif", "C": "BB1237n1c.gif", "D": "BB1237n1d.gif"}, "706": {"A": "AB2935a.gif", "B": "AB2935b.gif", "C": "AB2935c.gif", "D": "AB2935d.gif"}};
 
@@ -1421,71 +1481,6 @@
       document.getElementById('timerSecs').value        = cfg.timerDefault;
       document.getElementById('categorySelect').value   = cfg.category||'all';
       document.documentElement.setAttribute('data-theme', cfg.darkMode?'dark':'');
-      syncAuthUI();
-    }
-
-    function syncAuthUI() {
-      const loggedOut = document.getElementById('authLoggedOut');
-      const loggedIn  = document.getElementById('authLoggedIn');
-      const note      = document.getElementById('paywallAuthNote');
-      if (!loggedOut || !loggedIn) return;
-      if (isLoggedIn()) {
-        loggedOut.style.display = 'none';
-        loggedIn.style.display = 'block';
-        document.getElementById('authEmailDisplay').textContent = authEmail || '';
-        const statusEl = document.getElementById('authAccessStatus');
-        if (isFullyUnlocked()) {
-          const d = new Date(_accessExpiresAt);
-          statusEl.textContent = '✅ Full access active until ' + d.toLocaleDateString();
-        } else {
-          statusEl.textContent = 'No active 30-day pass yet.';
-        }
-        if (note) note.style.display = 'none';
-      } else {
-        loggedOut.style.display = 'block';
-        loggedIn.style.display = 'none';
-        if (note) note.style.display = '';
-      }
-    }
-
-    async function doLogin() {
-      const email = document.getElementById('authEmail').value.trim();
-      const password = document.getElementById('authPassword').value;
-      const msg = document.getElementById('authMsg');
-      msg.style.color = 'var(--danger)';
-      msg.textContent = '';
-      if (!email || !password) { msg.textContent = 'Enter email and password.'; return; }
-      try {
-        const data = await apiFetch('/api/login', { method: 'POST', body: JSON.stringify({ email, password }) });
-        setAuth(data.token, data.email);
-        await refreshAccessAndQuestions();
-        syncUI();
-        if (isFullyUnlocked()) { applyUnlock(false); } else if (hasAcceptedTerms()) { applyTrial(false); }
-        msg.style.color = 'var(--accent2)';
-        msg.textContent = 'Logged in!';
-      } catch (e) {
-        msg.textContent = e.message;
-      }
-    }
-
-    async function doSignup() {
-      const email = document.getElementById('authEmail').value.trim();
-      const password = document.getElementById('authPassword').value;
-      const msg = document.getElementById('authMsg');
-      msg.style.color = 'var(--danger)';
-      msg.textContent = '';
-      if (!email || !password) { msg.textContent = 'Enter email and password.'; return; }
-      if (password.length < 8) { msg.textContent = 'Password must be at least 8 characters.'; return; }
-      try {
-        const data = await apiFetch('/api/signup', { method: 'POST', body: JSON.stringify({ email, password }) });
-        setAuth(data.token, data.email);
-        await refreshAccessAndQuestions();
-        syncUI();
-        msg.style.color = 'var(--accent2)';
-        msg.textContent = 'Account created! You can now purchase 30-day access.';
-      } catch (e) {
-        msg.textContent = e.message;
-      }
     }
 
     // ── Tabs ──────────────────────────────────────────────────
@@ -1495,33 +1490,33 @@
     const TRIAL_LIMIT = 3;        // 3 free quiz attempts
     const FREE_STUDY_LIMIT = 10;  // First 10 questions free in Study & Scroll
 
-    // ── Auth / access state ────────────────────────────────────
-    // authToken persists in localStorage so users stay logged in across visits.
-    // It is just a login session token — it grants NO access to questions by
-    // itself; the backend re-checks access_expires_at on every /api/questions/full call.
-    let authToken = localStorage.getItem('theoryTestAuthToken') || null;
-    let authEmail = localStorage.getItem('theoryTestAuthEmail') || null;
-    let _accessExpiresAt = null; // ISO string from server, or null
+    // ── In-memory state ──────────────────────────────────────
+    // _termsAccepted: local UI flag for "has clicked accept" this session
+    // _fullyUnlocked: derived from server (/api/me is_active) — set by
+    //                 refreshAccessAndQuestions(), NOT settable directly
+    //                 by client logic (other than logout clearing it).
     var _termsAccepted = false;
+    var _fullyUnlocked = false;
     var _trialCount    = 0;
 
+    // Has user ever accepted terms?
     function hasAcceptedTerms() {
-      return _termsAccepted;
+      return _termsAccepted || !!currentUser;
     }
     function markTermsAccepted() {
       _termsAccepted = true;
     }
-    function isLoggedIn() {
-      return !!authToken;
-    }
-    // Subscription status — TRUE only if server confirmed access_expires_at is in the future
+    // Check subscription/access status — comes from server via /api/me
     function isFullyUnlocked() {
-      return !!(_accessExpiresAt && new Date(_accessExpiresAt) > new Date());
+      return _fullyUnlocked;
     }
+    // Is this a free trial user (logged in but not subscribed)?
     function isFreeUser() {
       return hasAcceptedTerms() && !isFullyUnlocked();
     }
-    function getTrialCount() { return _trialCount; }
+    function getTrialCount() {
+      return _trialCount;
+    }
     function setTrialCount(n) { _trialCount = n; }
     function trialsRemaining() {
       return Math.max(0, TRIAL_LIMIT - getTrialCount());
@@ -1530,97 +1525,169 @@
       if (isFullyUnlocked()) return;
       setTrialCount(getTrialCount() + 1);
     }
-
-    function apiHeaders() {
-      const h = { 'Content-Type': 'application/json' };
-      if (authToken) h['Authorization'] = 'Bearer ' + authToken;
-      return h;
-    }
-
-    async function apiFetch(path, options = {}) {
-      const res = await fetch(CONFIG.API_BASE + path, {
-        ...options,
-        headers: { ...apiHeaders(), ...(options.headers || {}) },
-      });
-      let data = null;
-      try { data = await res.json(); } catch (e) {}
-      if (!res.ok) throw new Error((data && data.error) || ('Request failed (' + res.status + ')'));
-      return data;
-    }
-
-    function setAuth(token, email) {
-      authToken = token;
-      authEmail = email;
-      localStorage.setItem('theoryTestAuthToken', token);
-      localStorage.setItem('theoryTestAuthEmail', email);
-    }
-
-    function clearAuth() {
-      authToken = null;
-      authEmail = null;
-      _accessExpiresAt = null;
-      localStorage.removeItem('theoryTestAuthToken');
-      localStorage.removeItem('theoryTestAuthEmail');
-    }
-
-    function logout() {
-      clearAuth();
-      ALL_QUESTIONS = [];
-      switchTab(0);
-      syncUI();
-    }
-
-    // Fetch /api/me to find out current access status, then load the right question set
-    async function refreshAccessAndQuestions() {
-      if (!authToken) {
-        ALL_QUESTIONS = [];
-        _accessExpiresAt = null;
-        return;
-      }
-      try {
-        const me = await apiFetch('/api/me');
-        _accessExpiresAt = me.access_expires_at;
-        authEmail = me.email;
-      } catch (e) {
-        // Token invalid/expired — log out
-        console.error('Session check failed:', e);
-        clearAuth();
-        ALL_QUESTIONS = [];
-        return;
-      }
-      await loadQuestions();
-    }
-
-    async function loadQuestions() {
-      try {
-        const path = isFullyUnlocked() ? '/api/questions/full' : '/api/questions/preview';
-        ALL_QUESTIONS = await apiFetch(path);
-      } catch (e) {
-        console.error('Failed to load questions:', e);
-        ALL_QUESTIONS = [];
-      }
-    }
-
-    // Called after returning from Stripe checkout (success_url includes ?paid=1)
+    // Called after returning from Stripe Checkout with ?paid=1
     async function onSubscriptionGranted() {
       await refreshAccessAndQuestions();
-      applyUnlock(false);
+      _trialCount = 0;
+      if (_fullyUnlocked) {
+        applyUnlock(false);
+      } else {
+        // Webhook may not have processed yet — try again shortly
+        setTimeout(async () => {
+          await refreshAccessAndQuestions();
+          if (_fullyUnlocked) applyUnlock(false);
+          else alert('Payment received — access is being activated. Please reload in a moment.');
+        }, 3000);
+      }
     }
 
-    // Start Stripe checkout for the £12.12 / 30-day pass
+    // Start Stripe Checkout via the backend (requires login first)
     async function openSubscribe() {
-      if (!isLoggedIn()) {
-        switchTab(0);
-        alert('Please log in or create an account first, then tap "Get Full Access".');
+      if (!authToken) {
+        alert('Please log in or create an account first, then tap "Get Full Access" again.');
+        showAuthPanel('login');
         return;
       }
       try {
-        const { url } = await apiFetch('/api/checkout', { method: 'POST' });
-        window.location.href = url; // redirect to Stripe Checkout
+        const res = await apiFetch('/api/checkout', { method: 'POST' });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert('Could not start checkout. Please try again.');
+        }
       } catch (e) {
-        alert('Could not start checkout: ' + e.message);
+        // apiFetch already handles auth errors
       }
     }
+
+    // "Already paid? Restore access" — just re-checks server status
+    async function checkStripeAccess() {
+      if (!authToken) {
+        alert('Please log in with the account you purchased with.');
+        showAuthPanel('login');
+        return;
+      }
+      await refreshAccessAndQuestions();
+      if (_fullyUnlocked) {
+        applyUnlock(false);
+        alert('✅ Access restored! Enjoy your 30-day unlimited access.');
+      } else {
+        alert('No active access found for this account.\nIf you just paid, please wait a moment and try again, or contact v.ahilan@yahoo.com');
+      }
+    }
+   // ── Auth UI ──────────────────────────────────────────────────
+   let _authMode = 'login'; // 'login' | 'signup'
+
+   function showAuthPanel(mode) {
+     _authMode = mode;
+     const submitBtn = document.getElementById('authSubmitBtn');
+     const tabLogin  = document.getElementById('authTabLogin');
+     const tabSignup = document.getElementById('authTabSignup');
+     if (mode === 'signup') {
+       submitBtn.textContent = 'Sign Up';
+       tabSignup.classList.add('ready');
+       tabLogin.classList.remove('ready');
+     } else {
+       submitBtn.textContent = 'Log In';
+       tabLogin.classList.add('ready');
+       tabSignup.classList.remove('ready');
+     }
+     document.getElementById('authError').textContent = '';
+   }
+
+   async function submitAuth() {
+     const email = document.getElementById('authEmail').value.trim();
+     const password = document.getElementById('authPassword').value;
+     const errEl = document.getElementById('authError');
+     errEl.textContent = '';
+
+     if (!email || !password) {
+       errEl.textContent = 'Please enter email and password.';
+       return;
+     }
+
+     const path = _authMode === 'signup' ? '/api/signup' : '/api/login';
+     try {
+       const res = await fetch(CONFIG_API.API_BASE + path, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ email, password })
+       });
+       const data = await res.json();
+
+       if (!res.ok) {
+         const messages = {
+           EMAIL_ALREADY_REGISTERED: 'That email is already registered. Try logging in instead.',
+           INVALID_CREDENTIALS: 'Incorrect email or password.',
+           EMAIL_AND_PASSWORD_REQUIRED: 'Please enter email and password.'
+         };
+         errEl.textContent = messages[data.error] || (data.error || 'Something went wrong.');
+         if (data.error === 'EMAIL_ALREADY_REGISTERED') showAuthPanel('login');
+         return;
+       }
+
+       if (_authMode === 'signup') {
+         // Auto-login after signup
+         errEl.textContent = '';
+         showAuthPanel('login');
+         const loginRes = await fetch(CONFIG_API.API_BASE + '/api/login', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ email, password })
+         });
+         const loginData = await loginRes.json();
+         if (!loginRes.ok) {
+           errEl.textContent = 'Account created — please log in.';
+           return;
+         }
+         await onLoginSuccess(loginData);
+       } else {
+         await onLoginSuccess(data);
+       }
+     } catch (e) {
+       errEl.textContent = 'Network error — please try again.';
+     }
+   }
+
+   async function onLoginSuccess(data) {
+     authToken = data.token;
+     try { localStorage.setItem('authToken', authToken); } catch(e) {}
+     document.getElementById('authPassword').value = '';
+     await refreshAccessAndQuestions();
+     updateAuthUI();
+     enforceStudyLock();
+     enforceScrollLock();
+   }
+
+   function doLogout() {
+     doLocalLogout();
+     updateAuthUI();
+     enforceStudyLock();
+     enforceScrollLock();
+   }
+
+   function updateAuthUI() {
+     const loggedOut = document.getElementById('authLoggedOut');
+     const loggedIn  = document.getElementById('authLoggedIn');
+     if (!loggedOut || !loggedIn) return;
+
+     if (authToken && currentUser) {
+       loggedOut.style.display = 'none';
+       loggedIn.style.display  = 'block';
+       document.getElementById('authEmailDisplay').textContent = currentUser.email;
+       const statusEl = document.getElementById('authAccessStatus');
+       if (currentUser.is_active && currentUser.access_expires_at) {
+         const exp = new Date(currentUser.access_expires_at);
+         statusEl.textContent = '✅ Full access until ' + exp.toLocaleDateString();
+       } else {
+         statusEl.textContent = '🎯 Free trial — subscribe for full 30-day access.';
+       }
+     } else {
+       loggedOut.style.display = 'block';
+       loggedIn.style.display  = 'none';
+     }
+   }
 
     function switchTab(idx) {
       document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
@@ -1745,14 +1812,22 @@
 
     async function unlock() {
       try {
-        if (!isLoggedIn()) {
-          alert('Please create a free account or log in below first, then tap Accept again.');
-          document.getElementById('authPanel').scrollIntoView({behavior:'smooth'});
+        markTermsAccepted();
+        if (!authToken) {
+          showAuthPanel('signup');
+          alert('Please create a free account (or log in) to start your free trial.');
           return;
         }
-        markTermsAccepted();
+        await refreshAccessAndQuestions();
+        if (ALL_QUESTIONS.length === 0) {
+          alert('Could not load questions. Please check your connection and try again.');
+          return;
+        }
+        if (_fullyUnlocked) {
+          applyUnlock(false);
+          return;
+        }
         recordTrialSession();
-        if (ALL_QUESTIONS.length === 0) await refreshAccessAndQuestions();
         applyTrial(false);
       } catch(e) {
         alert('Error during unlock: ' + e.message + '\n' + e.stack);
@@ -2482,51 +2557,35 @@ if (isFreeUser() && studyCur >= FREE_STUDY_LIMIT) {
     loadCfg();
 syncUI();
 initLiveCounter();
+showAuthPanel('login');
 
-(async function init() {
-  // If returning from Stripe checkout, surface that to the user
-  const params = new URLSearchParams(window.location.search);
-  const paid = params.get('paid') === '1';
-  const cancelled = params.get('cancelled') === '1';
-
-  await refreshAccessAndQuestions();
-  syncUI();
-
+(async function initApp() {
   try {
-    if (paid) {
-      await onSubscriptionGranted();
-      if (isFullyUnlocked()) {
-        alert('✅ Payment successful! Your 30-day access is now active.');
-      } else {
-        alert('Payment completed — if access does not show as active shortly, please refresh the page.');
-      }
+    // Restore session if a token was saved
+    if (authToken) {
+      await refreshAccessAndQuestions();
+      updateAuthUI();
     }
-    if (cancelled) {
-      // no-op, just clean URL below
+
+    // Returning from Stripe Checkout?
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('paid') === '1') {
+      await onSubscriptionGranted();
+      return;
     }
 
     if (isFullyUnlocked()) {
-      // Paid user — full access
       applyUnlock(true);
-    } else if (hasAcceptedTerms()) {
-      // Returning user — terms already accepted, skip copyright
+    } else if (hasAcceptedTerms() && authToken) {
+      // Returning logged-in user, not yet subscribed
       recordTrialSession();
       applyTrial(true);
     } else {
-      // First visit — show terms/copyright page
+      // First visit, or not logged in — show terms/login page
       switchTab(0);
     }
   } catch(e) {
-    console.error(e);
     switchTab(0);
-  }
-
-  // Clean up ?paid=1 / ?cancelled=1 from the URL
-  if (paid || cancelled) {
-    const url = new URL(window.location.href);
-    url.searchParams.delete('paid');
-    url.searchParams.delete('cancelled');
-    window.history.replaceState({}, '', url.toString());
   }
 })();
 </script>

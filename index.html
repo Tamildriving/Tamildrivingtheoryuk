@@ -587,8 +587,10 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       width: 100%; max-width: 420px;
+      max-height: 90vh;
       box-shadow: 0 24px 80px rgba(0,0,0,.6);
       overflow: hidden;
+      display: flex; flex-direction: column;
       animation: modalIn .25s ease;
     }
     @keyframes modalIn {
@@ -601,6 +603,7 @@
       padding: 22px 24px 18px;
       border-bottom: 1px solid var(--border);
       position: relative;
+      flex-shrink: 0;
     }
     .modal-logo {
       font-family: 'DM Serif Display', serif;
@@ -621,7 +624,7 @@
     }
     .modal-close:hover { background: var(--border); color: var(--text); }
 
-    .modal-body { padding: 24px; }
+    .modal-body { padding: 24px; overflow-y: auto; flex: 1; }
 
     /* Tab switcher */
     .auth-tabs {
@@ -1266,7 +1269,7 @@
 <div class="modal-overlay" id="authModal" onclick="handleOverlayClick(event)">
   <div class="modal-box">
     <div class="modal-header">
-      <div class="modal-logo">Tamil Driving Theory</div>
+      <div class="modal-logo"> Tamil Driving Theory</div>
       <div class="modal-title" id="modalTitle">Welcome back</div>
       <div class="modal-sub" id="modalSub">Sign in to continue your revision</div>
       <button class="modal-close" onclick="closeAuthModal()">✕</button>

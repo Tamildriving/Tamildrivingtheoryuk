@@ -138,7 +138,6 @@
     padding: 16px 28px;
     background: var(--navy);
     display: flex; align-items: center; gap: 10px;
-    position: sticky; top: 110px; z-index: 10;
   }
   .col-header-flag { font-size: 1.1rem; }
   .col-header-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
@@ -215,7 +214,6 @@
   @media (max-width: 768px) {
     .bilingual-grid { grid-template-columns: 1fr; }
     .col-en { border-right: none; border-bottom: 1px solid var(--border); }
-    .col-header { top: 64px; }
     .col-en.hide { display: none; }
     .col-ta.hide { display: none; }
     .data-table { font-size: 0.75rem; }
@@ -289,11 +287,14 @@
           <span class="section-num">Section 1</span>
           <p class="section-title-en">Who We Are</p>
           <div class="section-body-en">
-            <strong>Data Controller:</strong> Tamil Car Driving Theory<br>
+            <strong>Data Controller:</strong> Tamil Car Driving Theory (Mr Velupillai Ahilan)<br>
+            <strong>Address:</strong> 51 Elmwood Road, Slough, SL2 5QH, United Kingdom<br>
             <strong>Contact email:</strong> v.ahilan@yahoo.com<br>
-            <strong>Website:</strong> [YOUR WEBSITE URL]<br><br>
+            <strong>Website:</strong> tamildrivingtheoryuk.com<br><br>
             We are registered with the Information Commissioner's Office (ICO).<br>
-            <strong>ICO Registration Number:</strong> [YOUR ICO NUMBER]
+            <strong>ICO Registration Reference:</strong> ZC167852<br>
+            <strong>Date registered:</strong> 6 June 2026<br>
+            <strong>Registration expires:</strong> 5 June 2027
           </div>
         </div>
 
@@ -304,8 +305,11 @@
             We collect the following categories of personal data:
             <table class="data-table" style="margin-top:12px">
               <tr><th>Data</th><th>Why</th></tr>
-              <tr><td>Email address</td><td>Account identification</td></tr>
-              <tr><td>Password</td><td>Stored encrypted via Firebase; we never see plain-text</td></tr>
+              <tr><td>First name &amp; surname</td><td>To personalise your account and our communications with you</td></tr>
+              <tr><td>Email address</td><td>Account identification and communication</td></tr>
+              <tr><td>Phone number (optional)</td><td>Optional contact details for account support</td></tr>
+              <tr><td>Password</td><td>Stored as a one-way encrypted hash in our database — we never see your plain-text password</td></tr>
+              <tr><td>Marketing consent</td><td>To record whether you agreed to receive product updates and offers by email</td></tr>
               <tr><td>IP address</td><td>Security and fraud prevention at login</td></tr>
               <tr><td>Device fingerprint</td><td>Browser type, OS, screen resolution — enforces 3-device limit</td></tr>
               <tr><td>Session data</td><td>Start/end timestamps to monitor usage</td></tr>
@@ -319,7 +323,7 @@
           <p class="section-title-en">What We Do NOT Collect</p>
           <div class="section-body-en">
             <div class="highlight-box">
-              We do not store your card number, CVV, or full payment details — handled exclusively by Stripe. We do not collect your name or home address. We do not use advertising trackers or sell your data to third parties.
+              We do not store your card number, CVV, or full payment details — handled exclusively by Stripe. We do not collect your home address. We do not use advertising trackers or sell your data to third parties.
             </div>
           </div>
         </div>
@@ -358,10 +362,13 @@
           <div class="section-body-en">
             We share limited data with trusted processors:
             <ul style="margin-top:10px">
-              <li><strong>Firebase / Google</strong> — authentication, database, hosting. Data stored in europe-west2 (London). GDPR-compliant.</li>
+              <li><strong>Supabase</strong> — our database provider, used to securely store your account and profile data.</li>
+              <li><strong>Railway</strong> — hosts our backend server (API).</li>
+              <li><strong>Netlify</strong> — hosts our website front-end.</li>
               <li><strong>Stripe</strong> — payment processing. PCI DSS Level 1 certified. GDPR-compliant.</li>
+              <li><strong>Brevo</strong> — sends account-related emails (such as password resets) and, where you have given marketing consent, product updates and offers.</li>
             </ul>
-            Both operate under Data Processing Agreements with us.
+            All of these providers are GDPR-compliant and operate under data processing agreements with us where required. Our source code is hosted on GitHub, which does not have access to your personal data.
           </div>
         </div>
 
@@ -407,7 +414,7 @@
           <span class="section-num">Section 10</span>
           <p class="section-title-en">Security</p>
           <div class="section-body-en">
-            We protect your data through encrypted password storage, HTTPS-only access, Firestore security rules restricting data access, and regular review of access permissions.
+            We protect your data through encrypted (hashed) password storage, HTTPS-only access, database access controls restricting who can view your data, and regular review of access permissions.
           </div>
         </div>
 
@@ -453,11 +460,14 @@
           <span class="section-num">பிரிவு 1</span>
           <p class="section-title-ta">நாங்கள் யார்</p>
           <div class="section-body-ta">
-            <strong>தரவு கட்டுப்படுத்துபவர்:</strong> Tamil Car Driving Theory<br>
+            <strong>தரவு கட்டுப்படுத்துபவர்:</strong> Tamil Car Driving Theory (Mr Velupillai Ahilan)<br>
+            <strong>முகவரி:</strong> 51 Elmwood Road, Slough, SL2 5QH, United Kingdom<br>
             <strong>தொடர்பு மின்னஞ்சல்:</strong> v.ahilan@yahoo.com<br>
-            <strong>இணையதளம்:</strong> [உங்கள் இணையதள URL]<br><br>
+            <strong>இணையதளம்:</strong> tamildrivingtheoryuk.com<br><br>
             நாங்கள் தகவல் ஆணையாளர் அலுவலகத்தில் (ICO) பதிவு செய்யப்பட்டுள்ளோம்.<br>
-            <strong>ICO பதிவு எண்:</strong> [உங்கள் ICO எண்]
+            <strong>ICO பதிவு குறிப்பு:</strong> ZC167852<br>
+            <strong>பதிவு செய்யப்பட்ட தேதி:</strong> 6 ஜூன் 2026<br>
+            <strong>பதிவு காலாவதியாகும் தேதி:</strong> 5 ஜூன் 2027
           </div>
         </div>
 
@@ -468,8 +478,11 @@
             பின்வரும் வகை தனிப்பட்ட தரவுகளை சேகரிக்கிறோம்:
             <table class="data-table" style="margin-top:12px">
               <tr><th>தரவு</th><th>ஏன்</th></tr>
-              <tr><td>மின்னஞ்சல் முகவரி</td><td>கணக்கு அடையாளம்</td></tr>
-              <tr><td>கடவுச்சொல்</td><td>Firebase மூலம் குறியாக்கம் செய்யப்பட்டு சேமிக்கப்படுகிறது</td></tr>
+              <tr><td>முதல் பெயர் &amp; கடைசி பெயர்</td><td>உங்கள் கணக்கை தனிப்பயனாக்கவும், உங்களுடன் தொடர்பு கொள்ளவும்</td></tr>
+              <tr><td>மின்னஞ்சல் முகவரி</td><td>கணக்கு அடையாளம் மற்றும் தொடர்பு</td></tr>
+              <tr><td>தொலைபேசி எண் (விருப்பத்தேர்வு)</td><td>கணக்கு ஆதரவுக்கான விருப்ப தொடர்பு விவரங்கள்</td></tr>
+              <tr><td>கடவுச்சொல்</td><td>எங்கள் தரவுத்தளத்தில் ஒருவழி குறியாக்கம் (hash) செய்யப்பட்டு சேமிக்கப்படுகிறது — உங்கள் சாதாரண கடவுச்சொல்லை நாங்கள் ஒருபோதும் பார்க்க முடியாது</td></tr>
+              <tr><td>மார்க்_கட்டிங்/சந்தைப்படுத்தல் சம்மதம்</td><td>மின்னஞ்சல் மூலம் தயாரிப்பு புதுப்பிப்புகள் மற்றும் சலுகைகளை பெற நீங்கள் ஒப்புக்கொண்டீர்களா என்பதை பதிவு செய்ய</td></tr>
               <tr><td>IP முகவரி</td><td>பாதுகாப்பு மற்றும் மோசடி தடுப்பு</td></tr>
               <tr><td>சாதன அடையாளம்</td><td>உலாவி வகை, OS — 3 சாதன வரம்பை செயல்படுத்த</td></tr>
               <tr><td>அமர்வு தரவு</td><td>தொடக்க/இறுதி நேரங்கள்</td></tr>
@@ -483,7 +496,7 @@
           <p class="section-title-ta">நாங்கள் சேகரிக்காதவை</p>
           <div class="section-body-ta">
             <div class="highlight-box">
-              உங்கள் அட்டை எண், CVV அல்லது முழு கட்டண விவரங்களை சேமிக்கவில்லை — இவை Stripe மட்டுமே கையாளும். உங்கள் பெயர் அல்லது வீட்டு முகவரியை சேகரிக்கவில்லை. விளம்பர கண்காணிப்பாளர்கள் பயன்படுத்துவதில்லை மற்றும் தரவை மூன்றாம் தரப்பினருக்கு விற்பதில்லை.
+              உங்கள் அட்டை எண், CVV அல்லது முழு கட்டண விவரங்களை சேமிக்கவில்லை — இவை Stripe மட்டுமே கையாளும். உங்கள் வீட்டு முகவரியை சேகரிக்கவில்லை. விளம்பர கண்காணிப்பாளர்கள் பயன்படுத்துவதில்லை மற்றும் தரவை மூன்றாம் தரப்பினருக்கு விற்பதில்லை.
             </div>
           </div>
         </div>
@@ -522,10 +535,13 @@
           <div class="section-body-ta">
             நம்பகமான செயலாளர்களுடன் குறைந்த தரவை பகிர்கிறோம்:
             <ul style="margin-top:10px">
-              <li><strong>Firebase / Google</strong> — அங்கீகாரம், தரவுத்தளம், வழங்கல். europe-west2 (லண்டன்) பகுதியில் சேமிக்கப்படுகிறது. GDPR இணக்கமானது.</li>
+              <li><strong>Supabase</strong> — உங்கள் கணக்கு மற்றும் சுயவிவர தரவை பாதுகாப்பாக சேமிக்க பயன்படுத்தும் எங்கள் தரவுத்தள வழங்குநர்.</li>
+              <li><strong>Railway</strong> — எங்கள் பின்தள சேவையகத்தை (API) இயக்குகிறது.</li>
+              <li><strong>Netlify</strong> — எங்கள் இணையதளத்தின் முன்தளத்தை இயக்குகிறது.</li>
               <li><strong>Stripe</strong> — கட்டண செயலாக்கம். PCI DSS நிலை 1 சான்றிதழ் பெற்றது. GDPR இணக்கமானது.</li>
+              <li><strong>Brevo</strong> — கணக்கு தொடர்பான மின்னஞ்சல்களை (எ.கா. கடவுச்சொல் மீட்டமைப்பு) அனுப்புகிறது, மேலும் நீங்கள் மார்க்கெட்டிங் சம்மதம் வழங்கியிருந்தால், தயாரிப்பு புதுப்பிப்புகள் மற்றும் சலுகைகளையும் அனுப்புகிறது.</li>
             </ul>
-            இரண்டும் எங்களுடன் தரவு செயலாக்க ஒப்பந்தங்களில் செயல்படுகின்றன.
+            இந்த அனைத்து வழங்குநர்களும் GDPR இணக்கமானவை மற்றும் தேவையான இடங்களில் எங்களுடன் தரவு செயலாக்க ஒப்பந்தங்களின் கீழ் செயல்படுகின்றன. எங்கள் மூலக் குறியீடு GitHub இல் சேமிக்கப்பட்டுள்ளது, அதற்கு உங்கள் தனிப்பட்ட தரவை அணுக முடியாது.
           </div>
         </div>
 
@@ -571,7 +587,7 @@
           <span class="section-num">பிரிவு 10</span>
           <p class="section-title-ta">பாதுகாப்பு</p>
           <div class="section-body-ta">
-            குறியாக்கப்பட்ட கடவுச்சொல் சேமிப்பு, HTTPS மட்டுமே அணுகல், Firestore பாதுகாப்பு விதிகள் மற்றும் அணுகல் அனுமதிகளின் வழக்கமான மதிப்பாய்வு மூலம் உங்கள் தரவை பாதுகாக்கிறோம்.
+            குறியாக்கப்பட்ட (hash) கடவுச்சொல் சேமிப்பு, HTTPS மட்டுமே அணுகல், உங்கள் தரவை யார் பார்க்கலாம் என்பதை கட்டுப்படுத்தும் தரவுத்தள அணுகல் கட்டுப்பாடுகள், மற்றும் அணுகல் அனுமதிகளின் வழக்கமான மதிப்பாய்வு மூலம் உங்கள் தரவை பாதுகாக்கிறோம்.
           </div>
         </div>
 
@@ -637,5 +653,6 @@ function showLang(lang) {
   }
 }
 </script>
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c333f209e7824e9ca23915c167e8c70f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

@@ -667,6 +667,37 @@
       display: flex; align-items: center;
       justify-content: space-between; margin-bottom: 6px;
     }
+
+    .field-row-2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    @media (max-width: 480px) {
+      .field-row-2 { grid-template-columns: 1fr; }
+    }
+
+    .consent-group {
+      margin-bottom: 14px;
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .consent-question {
+      font-size: .8rem; color: var(--text2);
+      line-height: 1.55; margin-bottom: 10px;
+    }
+    .consent-options {
+      display: flex; gap: 18px;
+    }
+    .consent-option {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .85rem; color: var(--text);
+      cursor: pointer; font-weight: 600;
+    }
+    .consent-option input[type="radio"] {
+      accent-color: var(--accent);
+      width: 16px; height: 16px; cursor: pointer;
+    }
     .forgot-link {
       font-size: .73rem; color: var(--accent);
       background: none; border: none; cursor: pointer;
@@ -1235,7 +1266,7 @@
 <div class="modal-overlay" id="authModal" onclick="handleOverlayClick(event)">
   <div class="modal-box">
     <div class="modal-header">
-      <div class="modal-logo">🚗 Tamil Driving Theory</div>
+      <div class="modal-logo">Tamil Driving Theory</div>
       <div class="modal-title" id="modalTitle">Welcome back</div>
       <div class="modal-sub" id="modalSub">Sign in to continue your revision</div>
       <button class="modal-close" onclick="closeAuthModal()">✕</button>
@@ -1274,8 +1305,24 @@
       <!-- REGISTER PANEL -->
       <div class="auth-panel" id="panelRegister">
         <div class="field-group">
+          <div class="field-row-2">
+            <div>
+              <label class="field-label" for="regFirstName">First name<span class="ta-sm">முதல் பெயர்</span></label>
+              <input class="field-input" type="text" id="regFirstName" placeholder="First name" autocomplete="given-name">
+            </div>
+            <div>
+              <label class="field-label" for="regSurname">Surname<span class="ta-sm">கடைசி பெயர்</span></label>
+              <input class="field-input" type="text" id="regSurname" placeholder="Surname" autocomplete="family-name">
+            </div>
+          </div>
+        </div>
+        <div class="field-group">
           <label class="field-label" for="regEmail">Email address<span class="ta-sm">மின்னஞ்சல்</span></label>
           <input class="field-input" type="email" id="regEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="regPhone">Phone number (optional)<span class="ta-sm">தொலைபேசி எண் (விருப்பத்தேர்வு)</span></label>
+          <input class="field-input" type="tel" id="regPhone" placeholder="e.g. 07123 456789" autocomplete="tel">
         </div>
         <div class="field-group">
           <label class="field-label" for="regPassword">Password (min 8 characters)<span class="ta-sm">கடவுச்சொல் (குறைந்தது 8 எழுத்துகள்)</span></label>
@@ -1285,11 +1332,28 @@
           <label class="field-label" for="regConfirm">Confirm password<span class="ta-sm">கடவுச்சொல்லை உறுதிப்படுத்தவும்</span></label>
           <input class="field-input" type="password" id="regConfirm" placeholder="••••••••" autocomplete="new-password">
         </div>
+        <div class="consent-group">
+          <div class="consent-question">
+            Can we send you product updates, tips and special offers by email?<br>
+            <span class="ta-sm">எங்கள் தயாரிப்பு புதுப்பிப்புகள், குறிப்புகள் மற்றும் சிறப்பு சலுகைகளை மின்னஞ்சல் மூலம் அனுப்பலாமா?</span>
+          </div>
+          <div class="consent-options">
+            <label class="consent-option">
+              <input type="radio" name="regMarketing" value="yes" id="regMarketingYes">
+              Yes
+            </label>
+            <label class="consent-option">
+              <input type="radio" name="regMarketing" value="no" id="regMarketingNo">
+              No
+            </label>
+          </div>
+        </div>
         <button class="auth-submit" id="regBtn" onclick="doRegister()">
           Create Account →<span class="ta-sm" style="color:rgba(255,255,255,.8)">கணக்கு உருவாக்கவும்</span>
         </button>
         <div class="auth-message" id="regMsg"></div>
       </div>
+
 
       <!-- FORGOT PASSWORD PANEL -->
       <div class="auth-panel" id="panelForgot">
@@ -1418,14 +1482,22 @@
   }
 
   async function doRegister() {
-    const email    = document.getElementById('regEmail').value.trim();
-    const password = document.getElementById('regPassword').value;
-    const confirm  = document.getElementById('regConfirm').value;
+    const firstName = document.getElementById('regFirstName').value.trim();
+    const surname   = document.getElementById('regSurname').value.trim();
+    const email     = document.getElementById('regEmail').value.trim();
+    const phone     = document.getElementById('regPhone').value.trim();
+    const password  = document.getElementById('regPassword').value;
+    const confirm   = document.getElementById('regConfirm').value;
+    const marketingEl = document.querySelector('input[name="regMarketing"]:checked');
     const btn      = document.getElementById('regBtn');
     clearMsg('regMsg');
 
-    if (!email || !password) {
-      setMsg('regMsg', 'error', 'Please fill in all fields.');
+    if (!firstName || !surname || !email || !password) {
+      setMsg('regMsg', 'error', 'Please fill in all required fields.');
+      return;
+    }
+    if (!marketingEl) {
+      setMsg('regMsg', 'error', 'Please let us know if we can email you product updates (Yes or No).');
       return;
     }
     if (password.length < 8) {
@@ -1437,6 +1509,8 @@
       return;
     }
 
+    const marketingConsent = marketingEl.value === 'yes';
+
     btn.disabled = true;
     btn.textContent = 'Creating account…';
 
@@ -1444,7 +1518,7 @@
       const res = await fetch(API + '/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ firstName, surname, email, phone, password, marketingConsent }),
       });
       const data = await res.json();
 
